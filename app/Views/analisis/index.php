@@ -42,11 +42,11 @@
               <div class="row">
                 <div class="form-group col-6">
                   <label for="tanggal_awal" class="font-weight-bold">Pilih Tanggal Awal</label>
-                  <input class="form-control mb-2" name="tanggal_awal" type="date" value="<?= $tanggal_awal ?>">
+                  <input class="form-control mb-2" name="tanggal_awal" type="date" value="<?= $tanggal_awal ?>" placeholder="tanggal awal">
                 </div>
                 <div class="form-group col-6">
                   <label for="tanggal_akhir" class="font-weight-bold">Pilih Tanggal Akhir</label>
-                  <input class="form-control mb-2" name="tanggal_akhir" type="date" value="<?= $tanggal_akhir ?>">
+                  <input class="form-control mb-2" name="tanggal_akhir" type="date" value="<?= $tanggal_akhir ?>" placeholder="tanggal akhir">
                 </div>
               </div>
               <div class="form-group">

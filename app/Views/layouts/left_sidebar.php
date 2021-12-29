@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="menu-block customscroll">
-    <img src="<?= base_url(); ?>/vendors/images/banner-img.png" alt="" class="p-3 mt-4">
+    <img src="<?= base_url(); ?>/vendors/images/banner-img.png" alt="banner" class="p-3 mt-4">
     <div class="sidebar-menu">
       <center>
         <span id="lihat-calendar" class="text-white" style="font-family:sans-serif">
@@ -79,7 +79,7 @@
           }
           ?>
           <span style="font-size:15px; color:#142127;">
-            <?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . '<br>' . date("H:i") ?> WIB <img src="<?= base_url($ffff) ?>" style="width:22px">
+            <?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . '<br>' . date("H:i") ?> WIB <img src="<?= base_url($ffff) ?>" style="width:22px" alt="suasana">
           </span>
         </span>
       </center>

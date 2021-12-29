@@ -6,7 +6,7 @@
   <title><?= $title ?></title>
 
   <!-- Site favicon -->
-  <link rel="icon" type="image/png" href="<?= base_url(); ?>/vendors/images/favicon-16x16.png">
+  <link rel="icon" type="image/png" href="<?= base_url(); ?>/vendors/images/favicon-16x16.png" alt="icon">
 
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -29,7 +29,7 @@
   <!---bagian menu left sidebar-->
   <?= $this->include('/layouts/left_sidebar') ?>
 
-  <main role="main-container" id="konten">
+  <main>
     <!---konten-->
     <?= $this->renderSection('main-container') ?>
 

@@ -1,7 +1,5 @@
 <?= $this->extend('/layouts/layout') ?>
 <?= $this->section('main-container') ?>
-<?= $this->section('css_scripts') ?>
-<?= $this->endSection(); ?>
 
 <div class="main-container">
   <div class="pd-ltr-20">
