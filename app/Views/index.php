@@ -33,7 +33,7 @@
     <div class="jumbotron bg-cover text-white" style="border-radius: 12px !important; background-image: linear-gradient(to right, rgba(0,0,0,0.7) 40%,rgba(0,0,0,0.1) 60%), url(<?= base_url(); ?>/vendors/images/headersidebar.jpg); padding-top:40px; padding-bottom:40px;">
       <div class="container">
         <?php
-        //ubah timezone menjadi jakarta
+        //ubah timezone menjadi Asia/Jakarta
         date_default_timezone_set("Asia/Jakarta");
         //ambil jam dan menit
         $jam = date('H:i');
