@@ -33,9 +33,7 @@ $this->m_klaster = new KlasterModel();
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
     <br>
-    <div class="card show mb-4">
-      <button class="btn btn-info" id="buka_perhitungan"><i class="fa fa-eye"></i> buka perhitungan</button>
-    </div>
+
 
     <span id="perhitungan">
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -906,13 +904,11 @@ $this->m_klaster = new KlasterModel();
 
 
     <?php
-    if($data_analisis == 'banyak'){
+    if ($data_analisis == 'banyak') {
       //mendapatkan klaster yang tertinggi nilainya
       $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1");
       $hasils = $querys->getResultObject();
-
-    }
-    else{
+    } else {
       //mendapatkan klaster yang terendah nilainya
       $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1");
       $hasils = $querys->getResultObject();
@@ -946,7 +942,9 @@ $this->m_klaster = new KlasterModel();
 
                 <?php $q4 = $this->db->query("SELECT si from hasil_pengujian where id = " . $i); ?>
                 <?php $ccd = $q4->getResultObject(); ?>
-                <tr style="<?php if ('c' . $i == $pilih) {echo 'background-color:rgb(216, 227, 252);';} ?>">
+                <tr style="<?php if ('c' . $i == $pilih) {
+                              echo 'background-color:rgb(216, 227, 252);';
+                            } ?>">
                   <td>Cluster <?= $i ?><br>
                     <?php foreach ($ccd as $h) { ?>
                       (si = <?= round($h->si, 4) ?>)
@@ -1011,6 +1009,7 @@ $this->m_klaster = new KlasterModel();
     </div>
     <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white">Ulangi Klaster</a>
     <?php if ($rt2 >= 0.25) {  ?>
+     <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm" >Buka Perhitungan</a>
       <a href="<?php base_url() ?>/analisis/asosiasi" class="btn btn-success btn-sm">Lanjut FP-Growth</a>
     <?php } ?>
     <br>

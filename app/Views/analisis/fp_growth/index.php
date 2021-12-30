@@ -51,243 +51,244 @@ ini_set('memory_limit', '10240M');
         </span>
       </div>
     </div>
+    <br>
 
 
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Penyiapan Dataset Transaksi Hasil Klaster K-Medoids</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4 table-responsive">
-          <table class="table hover multiple-select-row data-table-export nowrap" width="100%" cellspacing="0">
-            <thead>
-              <tr>
-                <th>no</th>
-                <th>recepit number</th>
-                <th>tanggal</th>
-                <th>itemset</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $nos = 1;
-              $totalss = 0;
-              foreach ($data_ as $row) {
-                $tanggal[$row->receipt_number] = $row->tanggal;
-              }
-              foreach ($data as $key => $val) : ?>
-                <tr>
-                  <td><?php $totalss = $nos ?><?= $nos ?></td>
-                  <td><?= $key ?></td>
-                  <td><?= $tanggal[$key] ?></td>
-                  <td><?= implode(', ', $val) ?></td>
-                </tr>
-                <?php $nos++ ?>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+    <span id="perhitungans">
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Penyiapan Dataset Transaksi Hasil Klaster K-Medoids</h6>
         </div>
-      </div>
-    </div><br>
-
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Frequent Itemset</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4 table-responsive">
-          <table class="table hover multiple-select-row nowrap">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Itemset</th>
-                <th>Qty</th>
-                <th>Support</th>
-                <th>Support (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              foreach ($frequent_itemset as $key => $val) { ?>
+        <div class="card-body">
+          <div class="row px-4 table-responsive">
+            <table class="table hover multiple-select-row data-table-export nowrap" width="100%" cellspacing="0">
+              <thead>
                 <tr>
-                  <td><?= $no++ ?></td>
-                  <td><?= $key ?></td>
-                  <td><?= $val ?></td>
-                  <td><?= $val ?>/<?= $totalss ?> = <?= round($val / $totalss, 5) ?> </td>
-                  <td><?= round(($val / $totalss) * 100, 2) ?>%</td>
+                  <th>no</th>
+                  <th>recepit number</th>
+                  <th>tanggal</th>
+                  <th>itemset</th>
                 </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div><br>
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Ordered Itemset</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4 table-responsive">
-          <table class="table hover multiple-select-row data-table-export nowrap">
-            <thead>
-              <tr>
-                <th>Transaksi Ke-</th>
-                <th>Itemset</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              foreach ($ordered_itemset as $key => $val) : ?>
-                <tr>
-                  <td><?= $no++ ?></td>
-                  <td><?= implode(', ', $val) ?></td>
-                </tr>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div><br>
-
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> FP-Tree</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4">
-          <div class="alert alert-primary my-2" role="alert">
-            Untuk melihat struktur pohon asosiasi dari itemset transaksi
-            <a href="<?= base_url('/analisis/asosiasi/fptree') ?>" target="_blank" class="btn btn-sm btn-outline-primary ml-4">Lihat</a>
+              </thead>
+              <tbody>
+                <?php
+                $nos = 1;
+                $totalss = 0;
+                foreach ($data_ as $row) {
+                  $tanggal[$row->receipt_number] = $row->tanggal;
+                }
+                foreach ($data as $key => $val) : ?>
+                  <tr>
+                    <td><?php $totalss = $nos ?><?= $nos ?></td>
+                    <td><?= $key ?></td>
+                    <td><?= $tanggal[$key] ?></td>
+                    <td><?= implode(', ', $val) ?></td>
+                  </tr>
+                  <?php $nos++ ?>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-    </div><br>
+      </div><br>
 
 
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Conditional Patern Base</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4  table-responsive">
-          <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Suffix Pattern</th>
-                <th>Conditional Patern Base</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              // echo '<pre>' . print_r($f->item, 1) . '</pre>';
-              // echo '<pre>' . print_r($f->cpb, 1) . '</pre>';
-              foreach ($item as $key => $val) :
-                if (isset($cpb[$key])) : ?>
-                  <tr>
-                    <td><?= $no++ ?></td>
-                    <td class="nw"><?= $key ?></td>
-                    <td>
-                      <?php
-                      $arr = array();
-                      foreach ($cpb[$key] as $key => $val) {
-                        $arr[] = "<p> { " . implode(',', $val['items']) . ": <b>$val[count]</b> } </p>";
-                      }
-                      echo implode(', ', $arr); ?>
-                    </td>
-                  </tr>
-                <?php endif ?>
-              <?php endforeach ?>
-            </tbody>
-          </table>
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Frequent Itemset</h6>
         </div>
-      </div>
-    </div>
-    <br>
-
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Conditional FP-Tree</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4  table-responsive">
-          <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Item</th>
-                <th>Conditional Fp Tree</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              foreach ($item as $key => $val) :
-                if (isset($cfpt[$key])) : ?>
-                  <tr>
-                    <td><?= $no++ ?></td>
-                    <td class="nw"><?= $key ?></td>
-                    <td>
-                      <?php
-                      $arr = array();
-                      foreach ($cfpt[$key] as $key => $val) {
-                        $arr[] = "<p> { " . implode(',', $val['items']) . " : <b>$val[count]</b> } </p>";
-                      }
-                      echo implode(', ', $arr); ?>
-                    </td>
-                  </tr>
-                <?php endif ?>
-              <?php endforeach ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <br>
-
-    <div class="card shadow my-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Frequency Patern</h6>
-      </div>
-      <div class="card-body">
-        <div class="row px-4  table-responsive">
-          <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Item</th>
-                <th>Frequent Patern</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php
-              $no = 1;
-              foreach ($fpg as $key => $val) : ?>
-                <?php foreach ($val as $k => $v) : ?>
+        <div class="card-body">
+          <div class="row px-4 table-responsive">
+            <table class="table hover multiple-select-row nowrap">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Itemset</th>
+                  <th>Qty</th>
+                  <th>Support</th>
+                  <th>Support (%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                foreach ($frequent_itemset as $key => $val) { ?>
                   <tr>
                     <td><?= $no++ ?></td>
                     <td><?= $key ?></td>
-                    <td>
-                      <?= implode(', ', $v['items']); ?> (<?= $v['count'] ?>)
-                    </td>
+                    <td><?= $val ?></td>
+                    <td><?= $val ?>/<?= $totalss ?> = <?= round($val / $totalss, 5) ?> </td>
+                    <td><?= round(($val / $totalss) * 100, 2) ?>%</td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><br>
+
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Ordered Itemset</h6>
+        </div>
+        <div class="card-body">
+          <div class="row px-4 table-responsive">
+            <table class="table hover multiple-select-row data-table-export nowrap">
+              <thead>
+                <tr>
+                  <th>Transaksi Ke-</th>
+                  <th>Itemset</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                foreach ($ordered_itemset as $key => $val) : ?>
+                  <tr>
+                    <td><?= $no++ ?></td>
+                    <td><?= implode(', ', $val) ?></td>
                   </tr>
                 <?php endforeach ?>
-              <?php endforeach ?>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><br>
+
+
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> FP-Tree</h6>
+        </div>
+        <div class="card-body">
+          <div class="row px-4">
+            <div class="alert alert-primary my-2" role="alert">
+              Untuk melihat struktur pohon asosiasi dari itemset transaksi
+              <a href="<?= base_url('/analisis/asosiasi/fptree') ?>" target="_blank" class="btn btn-sm btn-outline-primary ml-4">Lihat</a>
+            </div>
+          </div>
+        </div>
+      </div><br>
+
+
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Conditional Patern Base</h6>
+        </div>
+        <div class="card-body">
+          <div class="row px-4  table-responsive">
+            <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Suffix Pattern</th>
+                  <th>Conditional Patern Base</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                // echo '<pre>' . print_r($f->item, 1) . '</pre>';
+                // echo '<pre>' . print_r($f->cpb, 1) . '</pre>';
+                foreach ($item as $key => $val) :
+                  if (isset($cpb[$key])) : ?>
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td class="nw"><?= $key ?></td>
+                      <td>
+                        <?php
+                        $arr = array();
+                        foreach ($cpb[$key] as $key => $val) {
+                          $arr[] = "<p> { " . implode(',', $val['items']) . ": <b>$val[count]</b> } </p>";
+                        }
+                        echo implode(', ', $arr); ?>
+                      </td>
+                    </tr>
+                  <?php endif ?>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-    <br>
+      <br>
 
+
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Conditional FP-Tree</h6>
+        </div>
+        <div class="card-body">
+          <div class="row px-4  table-responsive">
+            <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Item</th>
+                  <th>Conditional Fp Tree</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                foreach ($item as $key => $val) :
+                  if (isset($cfpt[$key])) : ?>
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td class="nw"><?= $key ?></td>
+                      <td>
+                        <?php
+                        $arr = array();
+                        foreach ($cfpt[$key] as $key => $val) {
+                          $arr[] = "<p> { " . implode(',', $val['items']) . " : <b>$val[count]</b> } </p>";
+                        }
+                        echo implode(', ', $arr); ?>
+                      </td>
+                    </tr>
+                  <?php endif ?>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="card shadow my-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Frequency Patern</h6>
+        </div>
+        <div class="card-body">
+          <div class="row px-4  table-responsive">
+            <table class="table hover multiple-select-row nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Item</th>
+                  <th>Frequent Patern</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $no = 1;
+                foreach ($fpg as $key => $val) : ?>
+                  <?php foreach ($val as $k => $v) : ?>
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td><?= $key ?></td>
+                      <td>
+                        <?= implode(', ', $v['items']); ?> (<?= $v['count'] ?>)
+                      </td>
+                    </tr>
+                  <?php endforeach ?>
+                <?php endforeach ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <br>
+    </span>
 
 
     <div class="card shadow my-4">
@@ -372,6 +373,10 @@ ini_set('memory_limit', '10240M');
     <a href="#" class="btn btn-warning text-white btn-sm" data-toggle="modal" data-target="#Medium-modal" type="button">Ubah Support dan Confidence
     </a>
     <a href="<?php base_url() ?>/hasil" class="btn btn-success btn-sm" type="button">Hasil
+    </a>
+    <a href="#" class="btn btn-info btn-sm" id="buka_perhitungans">Buka Perhitungan
+    </a>
+    <a href="#" class="btn btn-danger btn-sm" id="tutup_perhitungans">Tutup Perhitungan
     </a>
     <br>
     <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -560,6 +565,22 @@ ini_set('memory_limit', '10240M');
   $(document).ready(function() {
     $(".preloader").fadeOut();
   })
+</script>
+<script>
+  $(document).ready(function() {
+    $("#perhitungans").hide();
+    $("#tutup_perhitungans").hide();
+    $("#buka_perhitungans").click(function() {
+      $("#perhitungans").show();
+      $("#buka_perhitungans").hide();
+      $("#tutup_perhitungans").show();
+    });
+    $("#tutup_perhitungans").click(function() {
+      $("#perhitungans").hide();
+      $("#buka_perhitungans").show();
+      $("#tutup_perhitungans").hide();
+    });
+  });
 </script>
 
 <?= $this->endSection() ?>
