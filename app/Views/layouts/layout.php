@@ -29,7 +29,6 @@
   <?= $this->include('/layouts/header') ?>
   <!---bagian menu left sidebar-->
   <?= $this->include('/layouts/left_sidebar') ?>
-
   <main>
     <!---konten-->
     <?= $this->renderSection('main-container') ?>
