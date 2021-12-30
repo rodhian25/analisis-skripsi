@@ -538,10 +538,6 @@ $this->m_klaster = new KlasterModel();
       <br>
     </span>
     <br>
-    <div class="card show mb-4">
-      <button class="btn btn-info" id="tutup_perhitungan">tutup perhitungan</button>
-    </div>
-    <br>
     <?php
     //inisiaslisasi untuk hasil pengelompokkan dan pengujian
     $this->db->query("TRUNCATE TABLE hasil_klaster");
@@ -1009,7 +1005,8 @@ $this->m_klaster = new KlasterModel();
     </div>
     <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white">Ulangi Klaster</a>
     <?php if ($rt2 >= 0.25) {  ?>
-     <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm" >Buka Perhitungan</a>
+      <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm">Buka Perhitungan</a>
+      <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm">Tutup Perhitungan</a>
       <a href="<?php base_url() ?>/analisis/asosiasi" class="btn btn-success btn-sm">Lanjut FP-Growth</a>
     <?php } ?>
     <br>

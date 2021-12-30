@@ -14,6 +14,7 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- file css -->
+
   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/vendors/styles/core.css">
   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/responsive.bootstrap4.min.css">

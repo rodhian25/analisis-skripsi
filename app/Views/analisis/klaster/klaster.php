@@ -53,18 +53,18 @@
               <div class="form-group col-md-6">
                 <label class="font-weight-bold mb-4">Data hasil klaster akan di Asosiasi <span class="text-danger">*</span></label>
                 <br>
-                <input type="radio" name="data_analisis" value="sedikit" checked>
+                <input type="radio" name="data_analisis" placeholder="sedikit" value="sedikit" checked>
                 <label for="sedikit">Sedikit di Beli</label>&nbsp;&nbsp;
-                <input type="radio" name="data_analisis" value="banyak">
+                <input type="radio" name="data_analisis" placeholder="banyak" value="banyak">
                 <label for="banyak">Banyak di Beli</label><br>
               </div>
               <div class="form-group col-md-6">
                 <span id="pilihan_centroid">
                   <label class="font-weight-bold mb-4">Centroid Klaster</label>
                   <br>
-                  <input type="radio" name="centroid" value="random" checked>
+                  <input type="radio" name="centroid" value="random" checked placeholder="random">
                   <label for="html">Random</label>&nbsp;&nbsp;
-                  <input type="radio" name="centroid" value="akurasi">
+                  <input type="radio" name="centroid" value="akurasi" placeholder="akurasi">
                   <label for="css">Pilih</label><br>
                 </span>
               </div>
