@@ -1,6 +1,6 @@
 <?= $this->extend('/layouts/layout') ?>
 <?= $this->section('main-container') ?>
-<?php $this->db = \Config\Database::connect(); ?>
+
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->

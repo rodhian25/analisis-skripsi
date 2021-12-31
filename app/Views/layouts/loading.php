@@ -21,9 +21,9 @@
 
 <div class="preloader">
   <div class="loading">
-  <button class="btn btn-success" type="button" disabled>
-  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-  Loading...
-</button>
+    <button class="btn btn-success" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
   </div>
 </div>

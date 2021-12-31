@@ -12,7 +12,7 @@ class Asosiasi extends BaseController
   public $data;
   //data transaksi setelah di convert
   public $datas;
-  //data transaksi sebelum di perttransaksi
+  //data transaksi sebelum di per-transaksi
   public $datass;
   //total data transaksi
   public $total_data;
@@ -145,17 +145,13 @@ class Asosiasi extends BaseController
   function build_tree(&$parent_node, $ordered_itemset = array())
   {
     $ordered_itemset = array_values($ordered_itemset);
-
     if (!$ordered_itemset)
       return;
-
     $ordered_itemset[0] = array_values($ordered_itemset[0]);
-
     $itemset = current($ordered_itemset);
     $item = current($itemset);
 
     unset($ordered_itemset[0][0]);
-
     if (!$itemset) {
       unset($ordered_itemset[0]);
       $this->build_tree($this->fp_tree['Root']['next'], $ordered_itemset);
@@ -170,6 +166,8 @@ class Asosiasi extends BaseController
     }
   }
 
+
+
   /**
    * menampilkan fp tree dalam bentuk pohon
    */
@@ -179,6 +177,8 @@ class Asosiasi extends BaseController
     $this->_display($this->fp_tree['Root']);
     echo "</li></ul>";
   }
+
+
 
 
   /**
@@ -194,6 +194,8 @@ class Asosiasi extends BaseController
     }
     echo "</ul>";
   }
+
+
 
 
   /**
@@ -213,11 +215,12 @@ class Asosiasi extends BaseController
         'count' => $tree['count'],
       );
     }
-
     foreach ($tree['next'] as $key => $val) {
       $this->_cpb($items, $key, $val);
     }
   }
+
+
 
 
   /**
@@ -226,7 +229,6 @@ class Asosiasi extends BaseController
   function cpb()
   {
     $this->_cpb(array(),  'Root', $this->fp_tree['Root']);
-
     //echo '<pre>' . print_r($this->cpb, 1) . '</pre>';
     $arr = array();
     foreach ($this->cpb as $key => $val) {
@@ -294,6 +296,8 @@ class Asosiasi extends BaseController
       }
     }
   }
+
+
   /**
    * cfpt data tertentu
    */
@@ -301,8 +305,8 @@ class Asosiasi extends BaseController
   {
     $arr = array();
     $key = array();
-
     $max = 0;
+
     foreach ($datas as $val) {
       if (count($val['items']) > $max)
         $max = count($val['items']);

@@ -13,6 +13,7 @@
       </ol>
     </nav>
     <br>
+
     <!--end breadcrumb-->
     <a href="<?= base_url('/hasil/download') ?>" target="_blank" class="btn btn-success btn-sm mb-3">Download Hasil</a>
     <a href="<?= base_url('/hasil/download_fptree') ?>" target="_blank" class="btn btn-warning btn-sm mb-3 text-white">Download FP-Tree</a>

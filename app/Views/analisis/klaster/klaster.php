@@ -18,6 +18,7 @@
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
     <?= view('Myth\Auth\Views\_message_block') ?>
+
     <div class="card shadow mb-4">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Masukkan Jumlah Klaster, Nilai Support dan Confidence</h6>
@@ -97,7 +98,8 @@
           <button type="reset" class="btn btn-warning text-light btn-sm mb-2" id="lihat4"><i class="fa fa-eye"></i> Lihat Preprocesing</button>
         </div>
       </form>
-    </div><br>
+    </div>
+    <br>
 
 
     <div class="card shadow mb-4" id="lihat_data">
@@ -146,13 +148,11 @@
           $time = $time_end - $time_start;
           //memory yang digunakan dalam kilo byte
           $memory = round(memory_get_usage() / 1024, 2);
-
           //menampilkan waktu eksekusi dan memory yang digunakan
           echo '<pre>';
           echo "\nExecution Time: $time seconds";
           echo "\nMemory Usage: " . $memory . ' kb';
           echo '</pre>';
-
           ?>
         </div>
       </div>

@@ -106,7 +106,7 @@ class KlasterModel extends Model
         "harga" => 15,
       ]
     ];
-   
+
     return $produk_rand;
   }
 

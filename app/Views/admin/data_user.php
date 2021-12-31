@@ -1,6 +1,5 @@
 <?= $this->extend('\layouts\layout') ?>
 
-
 <!-- rendering tambahan css -->
 <?= $this->section('css_scripts') ?>
   <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
@@ -10,7 +9,6 @@
 
 
 <?= $this->section('main-container') ?>
-
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->

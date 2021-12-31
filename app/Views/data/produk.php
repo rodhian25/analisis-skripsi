@@ -39,11 +39,17 @@
                   <td class="text-center"><?= $no++ ?></td>
                   <td><?= $row->item_produk ?></td>
                   <td>Rp. <?= number_format((($row->harga) / $row->jumlah), 0, "", ".") ?></td>
-                  <td class="<?php if ($row->jenis == 'minuman') {
-                                echo "text-primary";
-                              } else {
-                                echo "text-warning";
-                              } ?>"><?= $row->jenis ?></td>
+                  <td class="
+                    <?php if ($row->jenis == 'minuman')
+                    {
+                      echo "text-primary";
+                    }
+                    else
+                    {
+                      echo "text-warning";
+                    }
+                    ?>">
+                    <?= $row->jenis ?></td>
                   <td class="text-center"><input type="checkbox" name="produk[]" value="<?= $row->id ?>"></td>
                 </tr>
               <?php } ?>
