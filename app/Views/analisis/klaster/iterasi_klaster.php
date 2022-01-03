@@ -127,7 +127,7 @@ $this->m_klaster = new KlasterModel();
                     $tc = array(); ?>
                     <?php foreach ($produk_rand as $k) { ?>
                       <td class="align-middle" colspan="2">
-                        <?php $hm[$e] = sqrt(pow(($key->jumlah - $c_jumlah[$e]), 2) + pow(($key->harga - $c_harga[$e]), 2));
+                        <?php $hm[$e] = abs((($key->jumlah - $c_jumlah[$e])) - (($key->harga - $c_harga[$e])));
                         echo $hm[$e];
                         $hc[$e] = $hm[$e]; ?>
                       </td>
@@ -254,7 +254,7 @@ $this->m_klaster = new KlasterModel();
                     <?php foreach ($produk_rand2 as $k) { ?>
                       <td class="align-middle" colspan="2">
                         <?php
-                        $hnm[$l] = sqrt(pow(($key->jumlah - $cn_jumlah[$l]), 2) + pow(($key->harga - $cn_harga[$l]), 2));
+                        $hnm[$l] = abs((($key->jumlah - $cn_jumlah[$l])) - (($key->harga - $cn_harga[$l])));
                         echo $hnm[$l];
                         $hcnm[$l] = $hnm[$l];
                         ?>
@@ -445,7 +445,7 @@ $this->m_klaster = new KlasterModel();
                         <?php $e = 0;
                         $tc = array(); ?>
                         <?php foreach ($produk_rand3[$iterasi] as $k) { ?>
-                          <td class="align-middle" colspan="2"><?php $hm[$e] = sqrt(pow(($key->jumlah - ${'jumlah_' . $iterasi}[$e]), 2) + pow(($key->harga - ${'harga_' . $iterasi}[$e]), 2));
+                          <td class="align-middle" colspan="2"><?php $hm[$e] = abs((($key->jumlah - ${'jumlah_' . $iterasi}[$e])) - (($key->harga - ${'harga_' . $iterasi}[$e])));
                                                                 echo $hm[$e];
                                                                 $hc[$e] = $hm[$e]; // $tc[$e] = array_sum($hc[$e]);
                                                                 ?>
@@ -1003,11 +1003,11 @@ $this->m_klaster = new KlasterModel();
 
 
     </div>
-    <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white">Ulangi Klaster</a>
+    <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
     <?php if ($rt2 >= 0.25) {  ?>
-      <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm">Buka Perhitungan</a>
-      <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm">Tutup Perhitungan</a>
-      <a href="<?php base_url() ?>/analisis/asosiasi" class="btn btn-success btn-sm">Lanjut FP-Growth</a>
+      <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm"><i class="fa fa-calculator"></i> Buka Perhitungan</a>
+      <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i> Tutup Perhitungan</a>
+      <a href="<?php base_url() ?>/analisis/asosiasi" class="btn btn-success btn-sm"><i class="fa fa-arrow-right"></i> Lanjut FP-Growth</a>
     <?php } ?>
     <br>
 

@@ -33,24 +33,24 @@
     <div class="jumbotron bg-cover text-white" style="border-radius: 12px !important; background-image: linear-gradient(to right, rgba(0,0,0,0.7) 40%,rgba(0,0,0,0.1) 60%), url(<?= base_url(); ?>/vendors/images/headersidebar.jpg); padding-top:40px; padding-bottom:40px;">
       <div class="container">
         <?php
-        //ubah timezone menjadi Asia/Jakarta
-        date_default_timezone_set("Asia/Jakarta");
-        //ambil jam dan menit
-        $jam = date('H:i');
-        //atur salam menggunakan IF
-        if ($jam > '05:30' && $jam < '10:30') {
-          $salam = 'Pagi';
-          $ffff = '/vendors/images/morning.png';
-        } elseif ($jam >= '10:30' && $jam < '15:00') {
-          $salam = 'Siang';
-          $ffff =  '/vendors/images/day.png';
-        } elseif ($jam >= '15:01' && $jam < '18:00') {
-          $salam = 'Sore';
-          $ffff =  '/vendors/images/afternoon.png';
-        } else {
-          $salam = 'Malam';
-          $ffff =  '/vendors/images/night.png';
-        }
+          //ubah timezone menjadi Asia/Jakarta
+          date_default_timezone_set("Asia/Jakarta");
+          //ambil jam dan menit
+          $jam = date('H:i');
+          //atur salam menggunakan IF
+          if ($jam > '05:30' && $jam < '10:30') {
+            $salam = 'Pagi';
+            $ffff = '/vendors/images/morning.png';
+          } elseif ($jam >= '10:30' && $jam < '15:00') {
+            $salam = 'Siang';
+            $ffff =  '/vendors/images/day.png';
+          } elseif ($jam >= '15:01' && $jam < '18:00') {
+            $salam = 'Sore';
+            $ffff =  '/vendors/images/afternoon.png';
+          } else {
+            $salam = 'Malam';
+            $ffff =  '/vendors/images/night.png';
+          }
         ?>
         <p class="lead sss text-center text-md-left">
           <img src="<?= base_url($ffff) ?>" style="width:33px"> Selamat <?= $salam ?>,
@@ -60,7 +60,6 @@
         <p class="sss text-center text-md-left d-none d-md-block" style="font-size:13pt;">Selamat Datang di Sistem Analisis Data Pembelian Konsumen Dalam Menentukan Promosi Menggunakan Algoritma K-Medoids dan FP-Growth</p>
       </div>
     </div>
-
 
     <div class="row">
       <p class="container text-center text-md-left d-md-none pb-4" style="font-size:13pt;">Selamat Datang di Sistem Analisis Data Pembelian Konsumen Dalam Menentukan Promosi Menggunakan Algoritma K-Medoids dan FP-Growth</p>

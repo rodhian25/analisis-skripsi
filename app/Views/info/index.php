@@ -17,6 +17,7 @@
     <br>
     <!-- end breadcrumb -->
 
+
     <div class="row">
       <div class="col-md-4">
         <div class="pd-20 card-box mb-30">
@@ -49,6 +50,41 @@
                 <td>Universitas</td>
                 <td class="px-3"> : </td>
                 <td>Universitas Riau</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+        </div>
+        <div class="pd-20 card-box mb-30">
+          <h4 class="text-dark h4">Info Aplikasi</h4>
+          <hr>
+          <br>
+          <table class="table-responsive">
+            <tbody>
+              <tr>
+                <td>Basis Sistem</td>
+                <td class="px-3"> : </td>
+                <td>Web</td>
+              </tr>
+              <tr>
+                <td>Versi PHP</td>
+                <td class="px-3"> : </td>
+                <td>7.4</td>
+              </tr>
+              <tr>
+                <td>Framework PHP</td>
+                <td class="px-3"> : </td>
+                <td>CodeIgneter <?= CodeIgniter\CodeIgniter::CI_VERSION ?></td>
+              </tr>
+              <tr>
+                <td>Framework CSS</td>
+                <td class="px-3"> : </td>
+                <td>Bootstrap v4.6</td>
+              </tr>
+              <tr>
+                <td>Database</td>
+                <td class="px-3"> : </td>
+                <td>Mysql v5.7.35</td>
               </tr>
             </tbody>
           </table>

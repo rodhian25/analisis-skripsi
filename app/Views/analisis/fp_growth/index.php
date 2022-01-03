@@ -310,15 +310,15 @@ ini_set('memory_limit', '10240M');
                 <td> - </td>
                 <td> A </td>
                 <td> B </td>
-                <td>Support ( A )</td>
-                <td>Support ( B )</td>
-                <td>Support ( A, B )</td>
+                <td>Kemunculan ( A )</td>
+                <td>Kemunculan ( B )</td>
+                <td>Kemunculan ( A, B )</td>
                 <td>J. Transaksi</td>
-                <td>Support ( A, B ) / J. Transaksi </td>
+                <td>Support ( A, B )</td>
                 <td>% </td>
-                <td>Support ( A, B ) / Support ( A ) </td>
+                <td>Confidence ( A, B )</td>
                 <td>% </td>
-                <td>( Support ( A, B ) / Support ( B ) ) / ( support ( A ) / J. Transaksi )</td>
+                <td>( Confidence ( A, B ) ) / ( Benchmark Confience (A, B) )</td>
               </tr>
             </thead>
             <tbody>
@@ -370,13 +370,13 @@ ini_set('memory_limit', '10240M');
     <br>
 
     <!----modal ubah support dan confidence--->
-    <a href="#" class="btn btn-warning text-white btn-sm" data-toggle="modal" data-target="#Medium-modal" type="button">Ubah Support dan Confidence
+    <a href="#" class="btn btn-warning text-white btn-sm" data-toggle="modal" data-target="#Medium-modal" type="button"><i class="fa fa-pencil"></i> Ubah Support dan Confidence
     </a>
-    <a href="<?php base_url() ?>/hasil" class="btn btn-success btn-sm" type="button">Hasil
+    <a href="#" class="btn btn-danger btn-sm" id="tutup_perhitungans"><i class="fa fa-minus-circle"></i> Tutup Perhitungan
     </a>
-    <a href="#" class="btn btn-info btn-sm" id="buka_perhitungans">Buka Perhitungan
+    <a href="#" class="btn btn-info btn-sm" id="buka_perhitungans"><i class="fa fa-calculator"></i> Buka Perhitungan
     </a>
-    <a href="#" class="btn btn-danger btn-sm" id="tutup_perhitungans">Tutup Perhitungan
+    <a href="<?php base_url() ?>/hasil" class="btn btn-success btn-sm" type="button"><i class="fa fa-floppy-o"></i> Hasil
     </a>
     <br>
     <div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

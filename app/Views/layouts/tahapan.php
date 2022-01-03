@@ -13,8 +13,7 @@
       <tbody>
         <?php $request = \Config\Services::request(); ?>
         <tr class="text-center">
-          <td scope="row"><span class="badge badge-
-          <?php if ($request->uri->getSegment(2) == "")
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "")
           {
             echo 'success';
           }
@@ -25,8 +24,7 @@
           ?>
           badge-pill">
           <i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-
-          <?php if ($request->uri->getSegment(2) == "klaster")
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "klaster")
           {
             echo 'success';
           }
@@ -37,8 +35,7 @@
           ?>
           badge-pill">
           <i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-
-          <?php if ($request->uri->getSegment(2) == "iterasi_klaster")
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster")
           {
             echo 'success';
           }
@@ -48,8 +45,7 @@
           }
           ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-
-          <?php if ($request->uri->getSegment(2) == "iterasi_klaster")
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster")
           {
             echo 'success';
           }
@@ -59,8 +55,7 @@
           }
           ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-
-          <?php if ($request->uri->getSegment(2) == "asosiasi")
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "asosiasi")
           {
             echo 'success';
           }
@@ -70,7 +65,7 @@
           }
           ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-        </tr>
+        </tr> 
       </tbody>
     </table>
   </div>
