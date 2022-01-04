@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-6 col-12">
             <div class="title">
-              <p>Upload File 
+              <p>Upload File
                 <span class="text-danger">*(wajib csv) </span>
               </p>
             </div>

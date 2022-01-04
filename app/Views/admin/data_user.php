@@ -2,8 +2,8 @@
 
 <!-- rendering tambahan css -->
 <?= $this->section('css_scripts') ?>
-  <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/src/plugins/datatables/css/responsive.bootstrap4.min.css">
 <?= $this->endSection() ?>
 <!-- end rendering tambahan css -->
 
@@ -40,7 +40,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php $i =1; ?>
+            <?php $i = 1; ?>
             <?php
             foreach ($data as $user) :
             ?>

@@ -40,12 +40,9 @@
                   <td><?= $row->item_produk ?></td>
                   <td>Rp. <?= number_format((($row->harga) / $row->jumlah), 0, "", ".") ?></td>
                   <td class="
-                    <?php if ($row->jenis == 'minuman')
-                    {
+                    <?php if ($row->jenis == 'minuman') {
                       echo "text-primary";
-                    }
-                    else
-                    {
+                    } else {
                       echo "text-warning";
                     }
                     ?>">

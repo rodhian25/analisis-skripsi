@@ -1,7 +1,7 @@
 <?= $this->extend('/layouts/layout') ?>
 
 <?= $this->section('css_scripts') ?>
-  <link rel="stylesheet" type="text/css" href="<?= base_url('src/plugins/jquery-steps/jquery.steps.css') ?>">
+<link rel="stylesheet" type="text/css" href="<?= base_url('src/plugins/jquery-steps/jquery.steps.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('main-container') ?>

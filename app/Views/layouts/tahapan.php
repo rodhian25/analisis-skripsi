@@ -13,59 +13,44 @@
       <tbody>
         <?php $request = \Config\Services::request(); ?>
         <tr class="text-center">
-          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "")
-          {
-            echo 'success';
-          }
-          else
-          {
-            echo 'light';
-          }
-          ?>
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "") {
+                                                      echo 'success';
+                                                    } else {
+                                                      echo 'light';
+                                                    }
+                                                    ?>
           badge-pill">
-          <i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "klaster")
-          {
-            echo 'success';
-          }
-          else
-          {
-            echo 'light';
-          }
-          ?>
+              <i class="icon-copy dw dw-check"></i></span></td>
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "klaster") {
+                                                      echo 'success';
+                                                    } else {
+                                                      echo 'light';
+                                                    }
+                                                    ?>
           badge-pill">
-          <i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster")
-          {
-            echo 'success';
-          }
-          else
-          {
-            echo 'light';
-          }
-          ?>
+              <i class="icon-copy dw dw-check"></i></span></td>
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster") {
+                                                      echo 'success';
+                                                    } else {
+                                                      echo 'light';
+                                                    }
+                                                    ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster")
-          {
-            echo 'success';
-          }
-          else
-          {
-            echo 'light';
-          }
-          ?>
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "iterasi_klaster") {
+                                                      echo 'success';
+                                                    } else {
+                                                      echo 'light';
+                                                    }
+                                                    ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "asosiasi")
-          {
-            echo 'success';
-          }
-          else
-          {
-            echo 'light';
-          }
-          ?>
+          <td scope="row"><span class="badge badge-<?php if ($request->uri->getSegment(2) == "asosiasi") {
+                                                      echo 'success';
+                                                    } else {
+                                                      echo 'light';
+                                                    }
+                                                    ?>
           badge-pill"><i class="icon-copy dw dw-check"></i></span></td>
-        </tr> 
+        </tr>
       </tbody>
     </table>
   </div>

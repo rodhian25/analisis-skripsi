@@ -87,36 +87,48 @@
       <ul id="accordion-menu">
         <li>
           <?php $request = \Config\Services::request(); ?>
-          <a href="<?= base_url(); ?>/" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "") { echo 'active'; } ?>">
+          <a href="<?= base_url(); ?>/" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "") {
+                                                                            echo 'active';
+                                                                          } ?>">
             <span class="micon dw dw-house-1"></span><span class="mtext">Beranda</span>
           </a>
         </li>
-        <!-- menu jika admin yang login-->
+        <!-- menu jika user admin yang login-->
         <?php if (in_groups('admin')) : ?>
           <li>
-            <a href="<?= base_url(); ?>/admin/data-user" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "admin") { echo 'active'; } ?>">
+            <a href="<?= base_url(); ?>/admin/data-user" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "admin") {
+                                                                                            echo 'active';
+                                                                                          } ?>">
               <span class="micon dw dw-user1"></span><span class="mtext">Akun User</span>
             </a>
           </li>
         <?php endif; ?>
-        <!-- akhir menu jika admin yang login-->
+        <!-- akhir menu jika user admin yang login-->
         <li>
-          <a href="<?= base_url(); ?>/data" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "data") { echo 'active'; } ?>">
+          <a href="<?= base_url(); ?>/data" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "data") {
+                                                                                echo 'active';
+                                                                              } ?>">
             <span class="micon dw dw-folder"></span><span class="mtext">Data</span>
           </a>
         </li>
         <li>
-          <a href="<?= base_url(); ?>/analisis" class="dropdown-toggle no-arrow <?php if ($request->uri->getSegment(1) == "analisis") { echo 'active'; } ?>">
+          <a href="<?= base_url(); ?>/analisis" class="dropdown-toggle no-arrow <?php if ($request->uri->getSegment(1) == "analisis") {
+                                                                                  echo 'active';
+                                                                                } ?>">
             <span class="micon dw dw-analytics1"></span><span class="mtext">Analisis</span>
           </a>
         </li>
         <li>
-          <a href="<?= base_url(); ?>/hasil" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "hasil") { echo 'active'; } ?>">
+          <a href="<?= base_url(); ?>/hasil" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "hasil") {
+                                                                                echo 'active';
+                                                                              } ?>">
             <span class="micon dw dw-invoice"></span><span class="mtext">Hasil</span>
           </a>
         </li>
         <li>
-          <a href="<?= base_url(); ?>/info" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "info") { echo 'active'; } ?>">
+          <a href="<?= base_url(); ?>/info" class="dropdown-toggle no-arrow  <?php if ($request->uri->getSegment(1) == "info") {
+                                                                                echo 'active';
+                                                                              } ?>">
             <span class="micon dw dw-keyhole"></span><span class="mtext">Info</span>
           </a>
         </li>
