@@ -536,326 +536,326 @@ $this->m_klaster = new KlasterModel();
       </div>
       <br>
       <br>
-    </span>
-    <br>
-    <?php
-    //inisiaslisasi untuk hasil pengelompokkan dan pengujian
-    $this->db->query("TRUNCATE TABLE hasil_klaster");
-    $this->db->query('TRUNCATE TABLE hasil_pengujian');
-    $centroid_temp_by_iterasi = $this->m_klaster->getCentroidTempByIterasi();
-    $centroid_temp_by_c = $this->m_klaster->getCentroidTempByC();
-    //pengujian klaster dengan si()
-    $hasilByC = $this->m_klaster->getHasilKlasterGroup();
-    ?>
+      <br>
+      <?php
+      //inisiaslisasi untuk hasil pengelompokkan dan pengujian
+      $this->db->query("TRUNCATE TABLE hasil_klaster");
+      $this->db->query('TRUNCATE TABLE hasil_pengujian');
+      $centroid_temp_by_iterasi = $this->m_klaster->getCentroidTempByIterasi();
+      $centroid_temp_by_c = $this->m_klaster->getCentroidTempByC();
+      //pengujian klaster dengan si()
+      $hasilByC = $this->m_klaster->getHasilKlasterGroup();
+      ?>
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h4 class="h5 mb-0 text-gray-800"><i class="icon-copy dw dw-analytics-11"></i> Hasil Pengelompokkan </h4>
-    </div>
-
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Hasil Pengelompokan</h6>
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h4 class="h5 mb-0 text-gray-800"><i class="icon-copy dw dw-analytics-11"></i> Hasil Pengelompokkan </h4>
       </div>
-      <div class="card-body">
-        <?php foreach ($centroid_temp_by_c as $val) {
-          $c[] = $val->c;
-        }
-        ?>
-        <?php foreach ($centroid_temp_by_iterasi as $key) {
-          if ($key->it == 1) {
-            $it = $key->it;
-            $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=" . $it);
-            foreach ($q2->getResultObject() as $vil) {
-              $hasil_q2[] = $vil->c;
-            }
-          }
-          if ($key->it == 2) {
-            $it = $key->it - 1;
-            $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=$it and jenis='NM'");
-            foreach ($q2->getResultObject() as $vil) {
-              $hasil_q2[] = $vil->c;
-            }
-          } else {
-            $it = $key->it - 1;
-            $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=" . $it);
-            foreach ($q2->getResultObject() as $vil) {
-              $hasil_q2[] = $vil->c;
-            }
-          }
-        } ?>
 
-        <?php $no = 0 ?>
-        <div class="table-responsive">
-          <table class="data-table table hover multiple-select-row nowrap" width="100%" cellspacing="0">
-            <thead class="bg-light-blue text-dark">
-              <tr align="center">
-                <th width="5%">No</th>
-                <th>Item Produk</th>
-                <?php for ($i = 0; $i < count($c); $i++) { ?>
-                  <th width="5%"><?php echo strtoupper($c[$i]); ?></th>
-                <?php } ?>
-                <th>Jumlah Pembelian</th>
-                <th>Harga</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($produk as $key) { ?>
-                <tr align="center">
-                  <td class="align-middle"><?= $no + 1 ?></td>
-                  <td class="align-middle text-left"><?= $key->item_produk ?></td>
-                  <?php for ($k = 0; $k < count($c); $k++) { ?>
-                    <?php if ($hasil_q2[$no] == $c[$k]) { ?>
-                      <td class='align-middle bg-success text-white font-weight-bold'>1</td>
-                      <?php $kk = $k + 1; ?>
-                      <?php $q3 = "insert into hasil_klaster(fk_id_processing,c) values(" . $key->id_processing . ",'c" . $kk . "')";
-                      $this->db->query($q3); ?>
-                    <?php } else {
-                      echo "<td>0</td>";
-                    } ?>
-                  <?php } ?>
-                  <td class="align-middle"><?= $key->jumlah ?></td>
-                  <td class="align-middle"><?= strval(number_format($key->harga * 1000, 0, '', '.')) ?></td>
-                </tr>
-                <?php $no++ ?>
-              <?php } ?>
-            </tbody>
-          </table>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Hasil Pengelompokan</h6>
         </div>
-      </div>
-    </div><br>
+        <div class="card-body">
+          <?php foreach ($centroid_temp_by_c as $val) {
+            $c[] = $val->c;
+          }
+          ?>
+          <?php foreach ($centroid_temp_by_iterasi as $key) {
+            if ($key->it == 1) {
+              $it = $key->it;
+              $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=" . $it);
+              foreach ($q2->getResultObject() as $vil) {
+                $hasil_q2[] = $vil->c;
+              }
+            }
+            if ($key->it == 2) {
+              $it = $key->it - 1;
+              $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=$it and jenis='NM'");
+              foreach ($q2->getResultObject() as $vil) {
+                $hasil_q2[] = $vil->c;
+              }
+            } else {
+              $it = $key->it - 1;
+              $q2 = $this->db->query("select id, jenis, c, iterasi from centroid_temp where iterasi=" . $it);
+              foreach ($q2->getResultObject() as $vil) {
+                $hasil_q2[] = $vil->c;
+              }
+            }
+          } ?>
 
-
-
-
-
-    <!--PENGUJIAN KLASTER DENGAN SI-->
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Perhitungan Pengujian Silhouette Coefficient(si)</h6>
-      </div>
-      <div class="card-body">
-        <button id="lihat1" class="btn btn-sm btn-outline-primary mb-3">Lihat</button>
-        <span id="pengujian-si">
-          <div class="alert alert-info mb-2">Untuk mengetahui akurasi klaster yang telah dibuat menggunakan pengujian Silhouette Coefficient(si).</div>
-          <?php foreach ($hasilByC as $vil) { ?>
-            <?php unset($c_jumlah); ?>
-            <?php unset($c_harga); ?>
-            <?php $kondisiC  = $vil->c; ?>
-
-            <?php $qt2 = $this->db->query('SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing WHERE c="' . $kondisiC . '"'); ?>
-
-            <?php foreach ($qt2->getResultObject() as $vel) {
-              $c_jumlah[] = $vel->jumlah;
-              $c_harga[] = $vel->harga;
-            } ?>
-
-            <div class="text-center mb-4 alert-warning">
-              <h5 class="font-weight-bold py-4 my-4">Hasil Perhitungan Jarak Ke Klaster Ke-<?= substr($vil->c, -1); ?></h5>
-            </div>
-            <?php unset($hp) ?>
-            <?php foreach ($hasilByC as $key) { ?>
-              <div class="mt-4 mb-4">
-                <h5 class="font-weight-bold">Klaster ke-<?= $clus = substr($key->c, -1); ?></h5>
-              </div>
-
-              <?php $q = $this->db->query('SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing WHERE c="' . $key->c  . '"'); ?>
-
-              <?php $no = 0; ?>
-              <div class="table-responsive">
-                <table class="data-table table hover multiple-select-row nowrap" id="dataTable" width="100%" cellspacing="0">
-                  <thead class="bg-light-blue text-dark">
-                    <tr align="center">
-                      <th width="5%">No</th>
-                      <th>Item Produk</th>
-                      <th>Jumlah</th>
-                      <th>Harga (*1000)</th>
-                      <?php $jarak = 0; ?>
-                      <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
-                        <th>Jarak ke-<?= $i + 1 ?></th>
-                      <?php } ?>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $cc = 0; ?>
-                    <?php foreach ($q->getResultArray() as $val) { ?>
-                      <tr align="center">
-                        <td class="align-middle"><?= $no + 1 ?></td>
-                        <td class="align-middle text-left"><?= $val['item'] ?></td>
-                        <td class="align-middle"><?php echo $val['jumlah'] ?></td>
-                        <td class="align-middle"><?php echo $val['harga'] ?></td>
-                        <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
-                          <td class="align-middle">
-                            <?php $ccc = sqrt(pow(($c_jumlah[$i] - $val['jumlah']), 2) + pow(($c_harga[$i] - $val['harga']), 2)) ?>
-                            <?php echo $ccc ?>
-                            <?php $cc = $cc + $ccc ?>
-                            <br>
-                          </td>
-                        <?php } ?>
-                        <?php $no++ ?>
-                      </tr>
-                    <?php } ?>
-                    <?php $jml = count($c_jumlah) ?>
-                    <tr>
-                      <td>Total: <?= $cc ?></td>
-                      <td colspan="<?= $jml + 4 ?>" align="right"><b>Rata-rata</b></td>
-                      <td><b><?= $hp[] = $cc / ($no * $jml); ?></b></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <?php $cc++ ?>
-            <?php } ?>
-
-            <table class="data-table table hover multiple-select-row nowrap mt-4 mb-4">
+          <?php $no = 0 ?>
+          <div class="table-responsive">
+            <table class="data-table table hover multiple-select-row nowrap" width="100%" cellspacing="0">
               <thead class="bg-light-blue text-dark">
                 <tr align="center">
-                  <th>a(i)</th>
-                  <th>b(i)</th>
-                  <th>S(i)</th>
+                  <th width="5%">No</th>
+                  <th>Item Produk</th>
+                  <?php for ($i = 0; $i < count($c); $i++) { ?>
+                    <th width="5%"><?php echo strtoupper($c[$i]); ?></th>
+                  <?php } ?>
+                  <th>Jumlah Pembelian</th>
+                  <th>Harga</th>
                 </tr>
               </thead>
               <tbody>
-                <tr align="center">
-                  <td><?= $a1[] = $hp[substr($vil->c, -1) - 1];
-                      $ai = $hp[substr($vil->c, -1) - 1]; ?></td>
-                  <td>
-                    <?php $ckkk = array($ai) ?>
-                    <?php $array = array_diff($hp, $ckkk);
-                    print_r($array);
-                    echo $bi = min($array) ?>
-                  </td>
-                  <td><?= $si[] = ($bi - $ai) / (MAX($bi, $ai)) ?></td>
-                </tr>
+                <?php foreach ($produk as $key) { ?>
+                  <tr align="center">
+                    <td class="align-middle"><?= $no + 1 ?></td>
+                    <td class="align-middle text-left"><?= $key->item_produk ?></td>
+                    <?php for ($k = 0; $k < count($c); $k++) { ?>
+                      <?php if ($hasil_q2[$no] == $c[$k]) { ?>
+                        <td class='align-middle bg-success text-white font-weight-bold'>1</td>
+                        <?php $kk = $k + 1; ?>
+                        <?php $q3 = "insert into hasil_klaster(fk_id_processing,c) values(" . $key->id_processing . ",'c" . $kk . "')";
+                        $this->db->query($q3); ?>
+                      <?php } else {
+                        echo "<td>0</td>";
+                      } ?>
+                    <?php } ?>
+                    <td class="align-middle"><?= $key->jumlah ?></td>
+                    <td class="align-middle"><?= strval(number_format($key->harga * 1000, 0, '', '.')) ?></td>
+                  </tr>
+                  <?php $no++ ?>
+                <?php } ?>
               </tbody>
             </table>
-          <?php } ?>
-          <?php for ($o = 0; $o < count($si); $o++) {
-            $q3 = "insert into hasil_pengujian(c,si) values(" . $o . "," . $si[$o] . ")";
-            $this->db->query($q3);
-          } ?>
-        </span>
-        <button id="tutup1" class="btn btn-sm btn-outline-primary mb-3">
-          <i class="fa fa-ban"></i> Tutup
-        </button>
-      </div>
-    </div>
-    </br>
-    </br>
+          </div>
+        </div>
+      </div><br>
 
 
 
 
-    <div class="card shadow mb-4">
-      <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Hasil Pengujian Pengelompokan Menggunakan Silhouette Coefficient</h6>
-      </div>
-      <div class="card-body">
-        <span id="hasil-si">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead class="bg-light-blue text-dark">
-              <tr align="center">
-                <th width="5">No</th>
-                <th>Klaster ke-</th>
-                <th>S(i)</th>
-                <th>Struktur</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php $qq = $this->db->query('SELECT id, si FROM hasil_pengujian'); ?>
-              <?php $hasil = $qq->getResultObject() ?>
-              <?php $no = 1;
-              $jmlsi = 0 ?>
-              <?php foreach ($hasil as $key) { ?>
-                <tr align="center">
-                  <td><?php echo $no ?></td>
-                  <td><?php echo $key->id ?></td>
-                  <td><?php echo $key->si;
-                      $jmlsi = $jmlsi + $key->si;
-                      $jms = $key->si; ?></td>
-                  <?php $no++ ?>
-                  <td>
-                    <?php
-                    if ($jms >= 0.7 and $jms <= 1) {
-                      $tampil = "CLUSTERING STRUKTUR KUAT";
-                    } else if ($jms >= 0.5) {
-                      $tampil = "CLUSTERING STRUKTUR SEDANG";
-                    } else if ($jms >= 0.25) {
-                      $tampil = "CLUSTERING STRUKTUR LEMAH";
-                    } else {
-                      $tampil = "CLUSTERING TIDAK TERSTRUKTUR";
-                    }
-                    echo $tampil;
-                    ?>
-                  </td>
-                </tr>
+
+      <!--PENGUJIAN KLASTER DENGAN SI-->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Perhitungan Pengujian Silhouette Coefficient(si)</h6>
+        </div>
+        <div class="card-body">
+          <button id="lihat1" class="btn btn-sm btn-outline-primary mb-3">Lihat</button>
+          <span id="pengujian-si">
+            <div class="alert alert-info mb-2">Untuk mengetahui akurasi klaster yang telah dibuat menggunakan pengujian Silhouette Coefficient(si).</div>
+            <?php foreach ($hasilByC as $vil) { ?>
+              <?php unset($c_jumlah); ?>
+              <?php unset($c_harga); ?>
+              <?php $kondisiC  = $vil->c; ?>
+
+              <?php $qt2 = $this->db->query('SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing WHERE c="' . $kondisiC . '"'); ?>
+
+              <?php foreach ($qt2->getResultObject() as $vel) {
+                $c_jumlah[] = $vel->jumlah;
+                $c_harga[] = $vel->harga;
+              } ?>
+
+              <div class="text-center mb-4 alert-warning">
+                <h5 class="font-weight-bold py-4 my-4">Hasil Perhitungan Jarak Ke Klaster Ke-<?= substr($vil->c, -1); ?></h5>
+              </div>
+              <?php unset($hp) ?>
+              <?php foreach ($hasilByC as $key) { ?>
+                <div class="mt-4 mb-4">
+                  <h5 class="font-weight-bold">Klaster ke-<?= $clus = substr($key->c, -1); ?></h5>
+                </div>
+
+                <?php $q = $this->db->query('SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing WHERE c="' . $key->c  . '"'); ?>
+
+                <?php $no = 0; ?>
+                <div class="table-responsive">
+                  <table class="data-table table hover multiple-select-row nowrap" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-light-blue text-dark">
+                      <tr align="center">
+                        <th width="5%">No</th>
+                        <th>Item Produk</th>
+                        <th>Jumlah</th>
+                        <th>Harga (*1000)</th>
+                        <?php $jarak = 0; ?>
+                        <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
+                          <th>Jarak ke-<?= $i + 1 ?></th>
+                        <?php } ?>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php $cc = 0; ?>
+                      <?php foreach ($q->getResultArray() as $val) { ?>
+                        <tr align="center">
+                          <td class="align-middle"><?= $no + 1 ?></td>
+                          <td class="align-middle text-left"><?= $val['item'] ?></td>
+                          <td class="align-middle"><?php echo $val['jumlah'] ?></td>
+                          <td class="align-middle"><?php echo $val['harga'] ?></td>
+                          <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
+                            <td class="align-middle">
+                              <?php $ccc = sqrt(pow(($c_jumlah[$i] - $val['jumlah']), 2) + pow(($c_harga[$i] - $val['harga']), 2)) ?>
+                              <?php echo $ccc ?>
+                              <?php $cc = $cc + $ccc ?>
+                              <br>
+                            </td>
+                          <?php } ?>
+                          <?php $no++ ?>
+                        </tr>
+                      <?php } ?>
+                      <?php $jml = count($c_jumlah) ?>
+                      <tr>
+                        <td>Total: <?= $cc ?></td>
+                        <td colspan="<?= $jml + 4 ?>" align="right"><b>Rata-rata</b></td>
+                        <td><b><?= $hp[] = $cc / ($no * $jml); ?></b></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <?php $cc++ ?>
               <?php } ?>
-              <tr align="center">
-                <th colspan="2">Jumlah</th>
-                <th colspan="2"><?php echo $jmlsi ?></th>
-              </tr>
-              <tr align="center">
-                <th colspan="2">Rata-rata</th>
-                <th colspan="2"><?php echo $rt2 = $jmlsi / count($hasil) ?></td>
-              </tr>
-              <tr align="center">
-                <th colspan="2">Hasil</th>
-                <th colspan="2">
-                  <?php
-                  if ($rt2 >= 0.7 and $rt2 <= 1) {
-                    $tampils = 'CLUSTERING STRUKTUR KUAT';
-                  } else if ($rt2 >= 0.5) {
-                    $tampils = 'CLUSTERING STRUKTUR SEDANG';
-                  } else if ($rt2 >= 0.25) {
-                    $tampils = 'CLUSTERING STRUKTUR LEMAH';
-                  } else {
-                    $tampils = 'CLUSTERING TIDAK TERSTRUKTUR';
-                  }
-                  echo "$tampils <a href='#' data-toggle='modal' data-target='#range-si' type='button'><i class='icon-copy ion-information-circled'></i></a>";
-                  ?>
 
-                  <!-- modal range-si -->
-                  <div class="modal fade" id="range-si" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h6 class="modal-title" id="myLargeModalLabel">Tabel Nilai Silhoutte Kaufman</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                          <table class="table table-bordered">
-                            <tr>
-                              <th>Nilai Silhoutte Coefficient</th>
-                              <th>Struktur</th>
-                            </tr>
-                            <tr>
-                              <td>0,7 < S(i) <=1</td>
-                              <td>Struktur Kuat</td>
-                            </tr>
-                            <tr>
-                              <td>0,5 < S(i) < 0.7</td>
-                              <td>Struktur Sedang</td>
-                            </tr>
-                            <tr>
-                              <td>0,25 < S(i) < 0.5</td>
-                              <td>Struktur Lemah</td>
-                            </tr>
-                            <tr>
-                              <td>S(i) < 0.25</td>
-                              <td>Tidak Terstruktur</td>
-                            </tr>
-                          </table>
+              <table class="data-table table hover multiple-select-row nowrap mt-4 mb-4">
+                <thead class="bg-light-blue text-dark">
+                  <tr align="center">
+                    <th>a(i)</th>
+                    <th>b(i)</th>
+                    <th>S(i)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr align="center">
+                    <td><?= $a1[] = $hp[substr($vil->c, -1) - 1];
+                        $ai = $hp[substr($vil->c, -1) - 1]; ?></td>
+                    <td>
+                      <?php $ckkk = array($ai) ?>
+                      <?php $array = array_diff($hp, $ckkk);
+                      print_r($array);
+                      echo $bi = min($array) ?>
+                    </td>
+                    <td><?= $si[] = ($bi - $ai) / (MAX($bi, $ai)) ?></td>
+                  </tr>
+                </tbody>
+              </table>
+            <?php } ?>
+            <?php for ($o = 0; $o < count($si); $o++) {
+              $q3 = "insert into hasil_pengujian(c,si) values(" . $o . "," . $si[$o] . ")";
+              $this->db->query($q3);
+            } ?>
+          </span>
+          <button id="tutup1" class="btn btn-sm btn-outline-primary mb-3">
+            <i class="fa fa-ban"></i> Tutup
+          </button>
+        </div>
+      </div>
+      </br>
+      </br>
+
+
+
+
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Hasil Pengujian Pengelompokan Menggunakan Silhouette Coefficient</h6>
+        </div>
+        <div class="card-body">
+          <span id="hasil-si">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead class="bg-light-blue text-dark">
+                <tr align="center">
+                  <th width="5">No</th>
+                  <th>Klaster ke-</th>
+                  <th>S(i)</th>
+                  <th>Struktur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php $qq = $this->db->query('SELECT id, si FROM hasil_pengujian'); ?>
+                <?php $hasil = $qq->getResultObject() ?>
+                <?php $no = 1;
+                $jmlsi = 0 ?>
+                <?php foreach ($hasil as $key) { ?>
+                  <tr align="center">
+                    <td><?php echo $no ?></td>
+                    <td><?php echo $key->id ?></td>
+                    <td><?php echo $key->si;
+                        $jmlsi = $jmlsi + $key->si;
+                        $jms = $key->si; ?></td>
+                    <?php $no++ ?>
+                    <td>
+                      <?php
+                      if ($jms >= 0.7 and $jms <= 1) {
+                        $tampil = "CLUSTERING STRUKTUR KUAT";
+                      } else if ($jms >= 0.5) {
+                        $tampil = "CLUSTERING STRUKTUR SEDANG";
+                      } else if ($jms >= 0.25) {
+                        $tampil = "CLUSTERING STRUKTUR LEMAH";
+                      } else {
+                        $tampil = "CLUSTERING TIDAK TERSTRUKTUR";
+                      }
+                      echo $tampil;
+                      ?>
+                    </td>
+                  </tr>
+                <?php } ?>
+                <tr align="center">
+                  <th colspan="2">Jumlah</th>
+                  <th colspan="2"><?php echo $jmlsi ?></th>
+                </tr>
+                <tr align="center">
+                  <th colspan="2">Rata-rata</th>
+                  <th colspan="2"><?php echo $rt2 = $jmlsi / count($hasil) ?></td>
+                </tr>
+                <tr align="center">
+                  <th colspan="2">Hasil</th>
+                  <th colspan="2">
+                    <?php
+                    if ($rt2 >= 0.7 and $rt2 <= 1) {
+                      $tampils = 'CLUSTERING STRUKTUR KUAT';
+                    } else if ($rt2 >= 0.5) {
+                      $tampils = 'CLUSTERING STRUKTUR SEDANG';
+                    } else if ($rt2 >= 0.25) {
+                      $tampils = 'CLUSTERING STRUKTUR LEMAH';
+                    } else {
+                      $tampils = 'CLUSTERING TIDAK TERSTRUKTUR';
+                    }
+                    echo "$tampils <a href='#' data-toggle='modal' data-target='#range-si' type='button'><i class='icon-copy ion-information-circled'></i></a>";
+                    ?>
+
+                    <!-- modal range-si -->
+                    <div class="modal fade" id="range-si" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h6 class="modal-title" id="myLargeModalLabel">Tabel Nilai Silhoutte Kaufman</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                          </div>
+                          <div class="modal-body">
+                            <table class="table table-bordered">
+                              <tr>
+                                <th>Nilai Silhoutte Coefficient</th>
+                                <th>Struktur</th>
+                              </tr>
+                              <tr>
+                                <td>0,7 < S(i) <=1</td>
+                                <td>Struktur Kuat</td>
+                              </tr>
+                              <tr>
+                                <td>0,5 < S(i) < 0.7</td>
+                                <td>Struktur Sedang</td>
+                              </tr>
+                              <tr>
+                                <td>0,25 < S(i) < 0.5</td>
+                                <td>Struktur Lemah</td>
+                              </tr>
+                              <tr>
+                                <td>S(i) < 0.25</td>
+                                <td>Tidak Terstruktur</td>
+                              </tr>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </th>
-              </tr>
-            </tbody>
-          </table>
-        </span>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </span>
+        </div>
       </div>
-    </div>
-    </br>
+      </br>
+    </span>
     </br>
 
 

@@ -138,7 +138,7 @@
 </div>
 <div class="mobile-menu-overlay"></div>
 
-
+<!-- menampilkan jam -->
 <script type="text/javascript">
   function showTime() {
     var a_p = "";
@@ -162,6 +162,7 @@
     curr_second = checkTime(curr_second);
     document.getElementById('clock').innerHTML = curr_hour + ":" + curr_minute + ":" + curr_second + " " + a_p;
   }
+
   function checkTime(i) {
     if (i < 10) {
       i = "0" + i;

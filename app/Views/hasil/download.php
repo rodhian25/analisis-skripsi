@@ -586,15 +586,8 @@
   <br>
   <br>
   <span>
-    <br>
     <smal style="position: absolute;
     right: 15px;"><?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . ' ' . date("H:i") ?> WIB</smal>
-    <br>
-    <br>
-    <img src="<?= base_url('/vendors/images/download qrcode.png') ?>" alt="qrcode" width="120px" style="position: absolute;
-    right: 60px;"><br><br><br><br><br>
-    <small style="position: absolute;
-    right: 45px;">Scan untuk Akses Halaman</small>
     <smal style="position: absolute;
     left: 20px;">Download by : <?= user()->username; ?> (<?= $datas->name; ?>)</smal>
   </span>

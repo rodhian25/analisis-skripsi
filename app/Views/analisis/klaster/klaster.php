@@ -54,9 +54,9 @@
               <div class="form-group col-md-6">
                 <label class="font-weight-bold mb-4">Data hasil klaster akan di Asosiasi <span class="text-danger">*</span></label>
                 <br>
-                <input type="radio" name="data_analisis" placeholder="sedikit" value="sedikit" checked>
+                <input type="radio" name="data_analisis" id="data_analisis" placeholder="sedikit" value="sedikit" checked>
                 <label for="sedikit">Sedikit di Beli</label>&nbsp;&nbsp;
-                <input type="radio" name="data_analisis" placeholder="banyak" value="banyak">
+                <input type="radio" name="data_analisis" id="data_analisis" placeholder="banyak" value="banyak">
                 <label for="banyak">Banyak di Beli</label><br>
               </div>
               <div class="form-group col-md-6">
@@ -93,9 +93,24 @@
           </div>
         </div>
         <div class="card-footer text-right">
-          <button type="submit" class="btn btn-success btn-sm mb-2"><i class="fa fa-save"></i> Proses</button>
+          <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal" data-target="#modal_proses_klaster"><i class="fa fa-save"></i> Proses</a>
           <button type="reset" class="btn btn-info btn-sm mb-2"><i class="fa fa-refresh"></i> Reset</button>
           <button type="reset" class="btn btn-warning text-light btn-sm mb-2" id="lihat4"><i class="fa fa-eye"></i> Lihat Preprocesing</button>
+        </div>
+        <!-- Modal action -->
+        <div class="modal fade" id="modal_proses_klaster" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal_proses_klaster" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center py-5">
+                Apakah data yang di inputkan sudah sesuai dengan yang diinginkan?
+                <br>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Tidak, Kembali</button>
+                <button type="submit" onclick="fungsi_tutup_modals()" class="btn btn-sm btn-success">Ya, Proses</button>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -210,6 +225,11 @@
   $(document).ready(function() {
     $(".preloader").fadeOut();
   })
+</script>
+<script>
+  function fungsi_tutup_modals() {
+    $('#modal_proses_klaster').modal('hide');
+  }
 </script>
 <!-- Datatable Setting js -->
 <script src="<?= base_url(); ?>/src/plugins/datatables/js/jquery.dataTables.min.js"></script>

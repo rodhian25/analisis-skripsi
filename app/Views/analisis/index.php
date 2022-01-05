@@ -42,15 +42,31 @@
               <div class="row">
                 <div class="form-group col-6">
                   <label for="tanggal_awal" class="font-weight-bold">Pilih Tanggal Awal</label>
-                  <input class="form-control mb-2" name="tanggal_awal" type="date" value="<?= $tanggal_awal ?>" placeholder="tanggal awal">
+                  <input class="form-control mb-2" name="tanggal_awal" type="date" value="<?= $tanggal_awal ?>" id="tanggal_awal" placeholder="tanggal awal">
                 </div>
                 <div class="form-group col-6">
                   <label for="tanggal_akhir" class="font-weight-bold">Pilih Tanggal Akhir</label>
-                  <input class="form-control mb-2" name="tanggal_akhir" type="date" value="<?= $tanggal_akhir ?>" placeholder="tanggal akhir">
+                  <input class="form-control mb-2" name="tanggal_akhir" type="date" value="<?= $tanggal_akhir ?>" id="tanggal_akhir" placeholder="tanggal akhir">
                 </div>
               </div>
               <div class="form-group">
-                <button type="submit" class="btn btn-success btn-sm mt-md-2 w-100">Proses -></button>
+                <a href="#" data-toggle="modal" data-target="#modal_proses_tanggal" class="btn btn-success btn-sm mt-md-2 w-100" onclick="proses()">Proses -></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal action -->
+        <div class="modal fade" id="modal_proses_tanggal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal_proses_tanggal" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center py-5">
+                Apakah tanggal awal dan tanggal akhir sudah sesuai dengan yang dipilih?
+                <br><br>
+                <span id="tampil_tanggal"></span>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Tidak, Kembali</button>
+                <button type="submit" onclick="fungsi_tutup_modal()" class="btn btn-sm btn-success">Ya, Proses</button>
               </div>
             </div>
           </div>
@@ -64,5 +80,14 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
-
+<script>
+  function proses() {
+    var tanggal_awal = document.getElementById("tanggal_awal").value;
+    var tanggal_akhir = document.getElementById("tanggal_akhir").value;
+    document.getElementById("tampil_tanggal").innerHTML = "<b>" + tanggal_awal +"</b>" + " " + " s/d " +" "+ "<b>" + tanggal_akhir +"</b>";
+  }
+  function fungsi_tutup_modal() {
+    $('#modal_proses_tanggal').modal('hide');
+  }
+</script>
 <?= $this->endSection() ?>
