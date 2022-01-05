@@ -403,7 +403,7 @@ ini_set('memory_limit', '10240M');
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Ubah</button>
+                <button type="submit" class="btn btn-primary" onclick="fungsi_tutup_modall()">Ubah</button>
               </div>
             </form>
           </div>
@@ -581,6 +581,12 @@ ini_set('memory_limit', '10240M');
       $("#tutup_perhitungans").hide();
     });
   });
+</script>
+<script>
+    function fungsi_tutup_modall() {
+    $('#Medium-modal').modal('hide');
+    $(".preloader").fadeIn();
+  }
 </script>
 
 <?= $this->endSection() ?>

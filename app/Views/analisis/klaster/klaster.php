@@ -229,6 +229,7 @@
 <script>
   function fungsi_tutup_modals() {
     $('#modal_proses_klaster').modal('hide');
+    $(".preloader").fadeIn();
   }
 </script>
 <!-- Datatable Setting js -->

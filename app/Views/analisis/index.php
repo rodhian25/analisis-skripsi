@@ -14,6 +14,7 @@
     <br />
     <!---->
 
+    <?= $this->include('/layouts/loading') ?>
     <!-- Tahapan Analisis Data -->
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
@@ -81,6 +82,11 @@
 
 <?= $this->section('pageScripts') ?>
 <script>
+  $(document).ready(function() {
+    $(".preloader").fadeOut();
+  })
+</script>
+<script>
   function proses() {
     var tanggal_awal = document.getElementById("tanggal_awal").value;
     var tanggal_akhir = document.getElementById("tanggal_akhir").value;
@@ -88,6 +94,7 @@
   }
   function fungsi_tutup_modal() {
     $('#modal_proses_tanggal').modal('hide');
+    $(".preloader").fadeIn();
   }
 </script>
 <?= $this->endSection() ?>
