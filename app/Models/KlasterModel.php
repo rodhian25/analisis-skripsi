@@ -88,22 +88,22 @@ class KlasterModel extends Model
   {
     $produk_rand = [
       [
-        "id_processing" => "19",
-        "item_produk" => "arabica coffee er coffee kopmil ice",
-        "jumlah" => 156,
-        "harga" => 17,
+        "id_processing" => "115",
+        "item_produk" => "milo ice",
+        "jumlah" => 701,
+        "harga" => 16,
       ],
       [
-        "id_processing" => "13",
-        "item_produk" => "arabica coffee er coffee ice long black ice",
-        "jumlah" => 60,
-        "harga" => 22,
+        "id_processing" => "137",
+        "item_produk" => "pisang bakar keju",
+        "jumlah" => 126,
+        "harga" => 16,
       ],
       [
-        "id_processing" => "157",
-        "item_produk" => "robusta coffee kopi susu ice",
-        "jumlah" => 376,
-        "harga" => 15,
+        "id_processing" => "182",
+        "item_produk" => "teh tarik hot",
+        "jumlah" => 59,
+        "harga" => 10,
       ]
     ];
 
@@ -115,22 +115,22 @@ class KlasterModel extends Model
   {
     $produk_rand2 = [
       [
-        "id_processing" => "2",
-        "item_produk" => "arabica coffee er coffee americano hot",
-        "jumlah" => 66,
-        "harga" => 18,
+        "id_processing" => "88",
+        "item_produk" => "mie aceh cumi rebus",
+        "jumlah" =>77,
+        "harga" => 20,
       ],
       [
-        "id_processing" => "36",
-        "item_produk" => "cokelat cincau ice",
-        "jumlah" => 115,
-        "harga" => 17,
+        "id_processing" => "115",
+        "item_produk" => "milo ice",
+        "jumlah" => 701,
+        "harga" => 16,
       ],
       [
-        "id_processing" => "57",
-        "item_produk" => "juice alpukat",
-        "jumlah" => 498,
-        "harga" => 15,
+        "id_processing" => "123",
+        "item_produk" => "nasi banjir udang",
+        "jumlah" => 65,
+        "harga" => 23,
       ]
     ];
 

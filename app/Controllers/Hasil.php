@@ -40,7 +40,6 @@ class Hasil extends BaseController
   public function download()
   {
     $var['title'] = 'Download Hasil';
-
     //mendapatkan status user sebagai apa
     $id = user()->id;
     $this->builder = $this->db->table('users');
@@ -51,11 +50,9 @@ class Hasil extends BaseController
     $query = $this->builder->get();
     $var['datas'] = $query->getRow();
     $var['datasss'] = $this->m_asosiasi->getDataHasilKlaster();
-
     $var['tgl'] = $this->db->query('SELECT tgl_awal, tgl_akhir FROM options LIMIT 1')->getRow();
     $var['options'] = $this->db->query('SELECT klaster, support, confidence, data_analisis FROM options LIMIT 1')->getRow();
     $var['hasil_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.item_produk as item, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing ORDER BY c asc, jumlah desc")->getResultObject();
-
     $tanggal_awal = $this->m_asosiasi->getTanggalAwal();
     $tanggal_akhir = $this->m_asosiasi->getTanggalAkhir();
     $var['data'] = $this->m_data->tampil_hasil_jumlah_data($tanggal_awal, $tanggal_akhir);

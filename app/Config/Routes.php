@@ -38,7 +38,7 @@ $routes->get('/', 'User::index');
 $routes->group('', ['filter' => 'role:admin'], function ($routes) {
     // bagian admin
     $routes->get('/admin/data-user', 'User::datauser', ['as' => 'datauser']);
-    $routes->get('/admin/data-user/(:num)', 'User::hapus_akun/$1');
+    $routes->post('/admin/data-user', 'User::hapus_user');
     // tutup bagian admin
 });
 

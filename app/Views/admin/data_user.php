@@ -52,7 +52,11 @@
                 <td><?= $user->no_hp; ?></td>
                 <td><?= $user->created_at; ?></td>
                 <td>
-                  <a class="dropdown-item text-danger" href="<?= base_url(); ?>/admin/data-user/<?= $user->userid ?>" type="button"><i class="dw dw-trash"></i> Hapus</a>
+                <form action="<?= base_url(); ?>/admin/data-user" method="post">
+                  <?= csrf_field() ?>
+                    <input type="hidden" name="id" value="<?= $user->userid ?>">
+                    <button onclick="return confirm('Apakah Anda yakin? menghapus <?= $user->username ?>')" class="dropdown-item text-danger" type="submit"><i class="dw dw-trash"></i> Hapus</button>
+                  </form>
                 </td>
               </tr>
             <?php endforeach ?>

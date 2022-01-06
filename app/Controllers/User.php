@@ -41,9 +41,10 @@ class User extends BaseController
     return view('admin/data_user', $var);
   }
 
-  // menghapus data user hanya untuk akses admin
-  public function hapus_akun($id)
+
+  public function hapus_user()
   {
+    $id = $this->request->getVar('id');
     $this->m_users->update($id, ['active' => $this->request->getVar('active')]);
     $this->m_users->delete($id);
     session()->setFlashdata('message', 'Hapus Akun Berhasil');
@@ -96,6 +97,8 @@ class User extends BaseController
     session()->setFlashdata('message', 'Update Data Profil Berhasil');
     return redirect()->to('/profile');
   }
+
+
 
 
   // mengubah password untuk semua akses

@@ -36,9 +36,9 @@ class Klaster extends BaseController
   {
     $var['time_start'] = $this->waktu;
     $var['title'] = "Pilih Jumlah Klaster";
-    $this->db->query("TRUNCATE TABLE hasil_processing");
     $tanggal_awal =  $this->request->getVar('tanggal_awal');
     $tanggal_akhir =  $this->request->getVar('tanggal_akhir');
+    $this->db->query("TRUNCATE TABLE hasil_processing");
     $this->m_data->simpanTanggalData($tanggal_awal, $tanggal_akhir);
     $var['data'] = $this->m_data->getDataProcessing($tanggal_awal, $tanggal_akhir);
     $var['tgl_awal'] = $tanggal_awal;
