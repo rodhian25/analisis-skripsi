@@ -62,11 +62,10 @@ class Hasil extends BaseController
     $var['hasils'] = $this->m_asosiasi->tampilHasil();
     $data_analisis = $this->m_asosiasi->data_analisis();
 
-    if($data_analisis == 'banyak'){
+    if ($data_analisis == 'banyak') {
       //mendapatkan klaster yang tinggi nilainya
       $var['cari_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1")->getRow();
-    }
-    else{
+    } else {
       //mendapatkan klaster yang terendah nilainya
       $var['cari_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1")->getRow();
     }

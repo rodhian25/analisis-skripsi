@@ -6,7 +6,7 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background-color: #fff;
+    background-color: #181e25;
   }
 
   .preloader .loading {
@@ -21,9 +21,10 @@
 
 <div class="preloader">
   <div class="loading">
-    <button class="btn btn-success" type="button" disabled>
+    <img src="<?= base_url('/vendors/images/loading.gif') ?>" alt="test" width="100%">
+    <!-- <button class="btn btn-success" type="button" disabled>
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      Loading...
-    </button>
+      Loading <br> mohon bersabar ya...
+    </button> -->
   </div>
 </div>

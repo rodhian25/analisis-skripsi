@@ -84,7 +84,7 @@ class KlasterModel extends Model
 
 
   //mendapatkan centroid pilihan
-  public function getProdukRandAkurasi()
+  public function getProdukPilihan()
   {
     $produk_rand = [
       [
@@ -111,13 +111,13 @@ class KlasterModel extends Model
   }
 
   //mendapatkan centroid pilihan
-  public function getProdukRandAkurasi2()
+  public function getProdukPilihan2()
   {
     $produk_rand2 = [
       [
         "id_processing" => "88",
         "item_produk" => "mie aceh cumi rebus",
-        "jumlah" =>77,
+        "jumlah" => 77,
         "harga" => 20,
       ],
       [

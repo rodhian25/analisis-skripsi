@@ -65,7 +65,7 @@ class DataModel extends Model
 
   public function simpanTanggalData($tanggal_awal, $tanggal_akhir)
   {
-    $query = "UPDATE options SET tgl_awal ='".$tanggal_awal."', tgl_akhir = '".$tanggal_akhir."' WHERE
+    $query = "UPDATE options SET tgl_awal ='" . $tanggal_awal . "', tgl_akhir = '" . $tanggal_akhir . "' WHERE
     id=1";
     $this->db->query($query);
   }
@@ -143,9 +143,8 @@ class DataModel extends Model
   function buat_tampil_produk()
   {
     $query = $this->db->query("SELECT sum(jumlah) as item, item_produk, harga, jumlah, jenis from data GROUP BY item_produk");
-    foreach($query->getResultObject() as $key)
-    {
-      $q3 = "insert into data_produk(item, item_produk, harga, jumlah) values(" . $key->item. ",'" . $key->item_produk . "','" . $key->harga . "','" . $key->jumlah . "')";
+    foreach ($query->getResultObject() as $key) {
+      $q3 = "insert into data_produk(item, item_produk, harga, jumlah) values(" . $key->item . ",'" . $key->item_produk . "','" . $key->harga . "','" . $key->jumlah . "')";
       $this->db->query($q3);
     }
   }
@@ -158,7 +157,6 @@ class DataModel extends Model
       $query = "UPDATE data_produk SET jenis ='" . $jenis . "' WHERE id='$id[$x]'";
       $this->db->query($query);
     }
-
   }
 
 
@@ -191,5 +189,4 @@ class DataModel extends Model
   {
     return $this->db->query("SELECT id from data_klaster group by receipt_number")->getResultObject();
   }
-
 }

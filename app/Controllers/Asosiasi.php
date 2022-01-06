@@ -74,7 +74,7 @@ class Asosiasi extends BaseController
   }
 
 
-// FUNGSI UNTUK ANALISIS FP-GROWTH -----------------------------------------------------------------
+  // FUNGSI UNTUK ANALISIS FP-GROWTH -----------------------------------------------------------------
   /**
    * menampilkan quantity setiap item berapa kali muncul di transaksi
    */
@@ -112,10 +112,10 @@ class Asosiasi extends BaseController
       $arr = array();
       foreach ($this->frequent_itemset as $category => $count) {
         if (in_array($category, $data))
-        $arr[] = $category;
+          $arr[] = $category;
       }
       if ($arr)
-      $this->ordered_itemset[] = $arr;
+        $this->ordered_itemset[] = $arr;
     }
   }
 
@@ -331,7 +331,6 @@ class Asosiasi extends BaseController
       $itemset--;
     }
     return $arr3;
-
   }
 
 
@@ -348,7 +347,7 @@ class Asosiasi extends BaseController
     $total = 0;
     foreach ($datas as $key => $val) {
       if ($this->match($com, $val['items']))
-      $total += $val['count'];
+        $total += $val['count'];
     }
     return array(
       'items' => $com,
@@ -467,9 +466,9 @@ class Asosiasi extends BaseController
           $arr2[$no]['a'] = $item_val['count'];
           $arr2[$no]['total'] = $this->total_data;
           $arr2[$no]['sup'] = $arr2[$no]['a'] / $arr2[$no]['total'];
-          $arr2[$no]['conf'] =@($arr2[$no]['a'] / $arr2[$no]['b']);
+          $arr2[$no]['conf'] = @($arr2[$no]['a'] / $arr2[$no]['b']);
           $s_head = $this->get_match($arr2[$no]['right']) / $this->total_data;
-          $arr2[$no]['lr'] =@($arr2[$no]['conf'] / $s_head);
+          $arr2[$no]['lr'] = @($arr2[$no]['conf'] / $s_head);
           $no++;
         }
       }
@@ -530,6 +529,4 @@ class Asosiasi extends BaseController
     $this->m_asosiasi->updateSupportConfidence($support, $confidence);
     return redirect()->back();
   }
-
-
 }

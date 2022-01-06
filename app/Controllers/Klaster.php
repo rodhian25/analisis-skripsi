@@ -14,11 +14,11 @@ class Klaster extends BaseController
 
   public function __construct()
   {
+    $this->waktu = microtime(true);
+    $this->db = \Config\Database::connect();
     $this->m_data = new DataModel();
     $this->m_klaster = new KlasterModel();
     $this->m_asosiasi = new AsosiasiModel();
-    $this->db = \Config\Database::connect();
-    $this->waktu = microtime(true);
   }
 
   // pengambilan data tanggal awal dan akhir yang ingin dipakai dalam analisis
@@ -83,8 +83,8 @@ class Klaster extends BaseController
         $var['produk_rand2'] = $this->m_klaster->getProdukRand($jumlah);
       }
       else{
-        $var['produk_rand'] = $this->m_klaster->getProdukRandAkurasi();
-        $var['produk_rand2'] = $this->m_klaster->getProdukRandAkurasi2();
+        $var['produk_rand'] = $this->m_klaster->getProdukPilihan();
+        $var['produk_rand2'] = $this->m_klaster->getProdukPilihan2();
       }
       $var['jumlah_klaster'] = $this->m_klaster->getJumlahKlaster();
       $var['tanggal_awal'] = $this->m_asosiasi->getTanggalAwal();

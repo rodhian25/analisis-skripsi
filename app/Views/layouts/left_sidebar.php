@@ -78,7 +78,7 @@
             $ffff =  '/vendors/images/night.png';
           }
           ?>
-          <span style="font-size:15px; color:#142127;">
+          <span style="font-size:15px; color:#142127; font-family:Inter;">
             <?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . '<br>' ?><span id="clock"></span> <img src="<?= base_url($ffff) ?>" style="width:22px" alt="suasana">
           </span>
         </span>

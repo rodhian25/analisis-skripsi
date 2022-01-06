@@ -11,8 +11,8 @@ class Data extends BaseController
 
   public function __construct()
   {
-    $this->m_data = new DataModel();
     $this->db = \Config\Database::connect();
+    $this->m_data = new DataModel();
   }
 
   // menampilkan detail data transaksi
@@ -28,8 +28,8 @@ class Data extends BaseController
   // menampilkan tabel detail data transaksi
   public function ajaxLoadData()
   {
-		  return DataTables::use('data')->select('id, receipt_number,staff,tanggal,pukul,item_produk,jumlah,harga, (harga/jumlah) as perharga')
-			->make(true);
+    return DataTables::use('data')->select('id, receipt_number,staff,tanggal,pukul,item_produk,jumlah,harga, (harga/jumlah) as perharga')
+      ->make(true);
   }
 
   // menampilkan data transaksi
@@ -130,5 +130,4 @@ class Data extends BaseController
       return view("/data");
     }
   }
-
 }

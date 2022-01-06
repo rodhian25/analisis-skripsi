@@ -135,5 +135,4 @@ class User extends BaseController
     session()->setFlashdata('message', 'Update Data Password Berhasil');
     return redirect()->to('/logout');
   }
-
 }
