@@ -900,22 +900,40 @@ $this->m_klaster = new KlasterModel();
 
 
     <?php
-    if ($data_analisis == 'banyak') {
+    if ($data_analisis == 'banyak')
+    {
       //mendapatkan klaster yang tertinggi nilainya
       $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1");
       $hasils = $querys->getResultObject();
-    } else {
+      $pilihmaxgbn ='';
+    }
+    elseif ($data_analisis == 'sedikit')
+    {
       //mendapatkan klaster yang terendah nilainya
       $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1");
       $hasils = $querys->getResultObject();
+      $pilihmaxgbn ='';
     }
-
+    else
+    {
+      //mendapatkan klaster yang terendah nilainya
+      $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1");
+      $hasils = $querys->getResultObject();
+      //mendapatkan klaster yang tertinggi nilainya
+      $queryss = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1");
+      $hasilsmaxgbn = $queryss->getResultObject();
+      //jika yang dipilih banyak dalam gabungan
+      foreach ($hasilsmaxgbn as $ttt) {
+        $pilihmaxgbn = $ttt->c;
+    }
+    }
+    //jika yang dipilih antra sedikit atau banyak, dan juga untuk yang sedikit dalam gabungan
     foreach ($hasils as $tt) {
       $pilih = $tt->c;
     }
 
     //menampilkan produk yang terdapat pada klaster yang dipilih sebelumnya
-    $queryss = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing where c='$pilih' ");
+    $queryss = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing where c='$pilih' or c='$pilihmaxgbn'");
     $hasilss = $queryss->getResultArray(); ?>
 
     <div class="row">
@@ -938,14 +956,14 @@ $this->m_klaster = new KlasterModel();
 
                 <?php $q4 = $this->db->query("SELECT si from hasil_pengujian where id = " . $i); ?>
                 <?php $ccd = $q4->getResultObject(); ?>
-                <tr style="<?php if ('c' . $i == $pilih) {
+                <tr style="<?php if (('c' . $i == $pilih) || ('c' . $i == $pilihmaxgbn)) {
                               echo 'background-color:rgb(216, 227, 252);';
                             } ?>">
                   <td>Cluster <?= $i ?><br>
                     <?php foreach ($ccd as $h) { ?>
                       (si = <?= round($h->si, 4) ?>)
                     <?php } ?><br>
-                    <?php if ('c' . $i == $pilih) {
+                    <?php if (('c' . $i == $pilih) || ('c' . $i == $pilihmaxgbn)) {
                       echo 'dianalisis';
                     } ?>
                   </td>
@@ -1003,7 +1021,7 @@ $this->m_klaster = new KlasterModel();
 
 
     </div>
-    <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
+    <a href="<?php base_url() ?>/analisis/klaster" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
     <?php if ($rt2 >= 0.25) {  ?>
       <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm"><i class="fa fa-calculator"></i> Buka Perhitungan</a>
       <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i> Tutup Perhitungan</a>

@@ -78,13 +78,14 @@ class Klaster extends BaseController
       $var['sup_con'] = $this->m_asosiasi->getSupportConfidence($jumlah, $support, $confidence, $data_analisis);
       $var['jml'] = $jumlah;
       $var['data_analisis'] = $data_analisis;
-      if($centroid == 'random'){
-        $var['produk_rand'] = $this->m_klaster->getProdukRand($jumlah);
-        $var['produk_rand2'] = $this->m_klaster->getProdukRand($jumlah);
-      }
-      else{
+      //perhitungan di skripsi
+      if($centroid == 'pilih'){
         $var['produk_rand'] = $this->m_klaster->getProdukPilihan();
         $var['produk_rand2'] = $this->m_klaster->getProdukPilihan2();
+      }
+      else{
+        $var['produk_rand'] = $this->m_klaster->getProdukRand($jumlah);
+        $var['produk_rand2'] = $this->m_klaster->getProdukRand($jumlah);
       }
       $var['jumlah_klaster'] = $this->m_klaster->getJumlahKlaster();
       $var['tanggal_awal'] = $this->m_asosiasi->getTanggalAwal();

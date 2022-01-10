@@ -90,8 +90,15 @@
   function proses() {
     var tanggal_awal = document.getElementById("tanggal_awal").value;
     var tanggal_akhir = document.getElementById("tanggal_akhir").value;
-    document.getElementById("tampil_tanggal").innerHTML = "<b>" + tanggal_awal +"</b>" + " " + " s/d " +" "+ "<b>" + tanggal_akhir +"</b>";
+    var tanggal_awal_tahun = tanggal_awal.split("-");
+    var tanggal_akhir_tahun = tanggal_akhir.split("-");
+    var t_a = new Date(tanggal_awal_tahun[0], tanggal_awal_tahun[1] - 1, tanggal_awal_tahun[2])
+    var t_b = new Date(tanggal_akhir_tahun[0], tanggal_akhir_tahun[1] - 1, tanggal_akhir_tahun[2])
+    let a = t_a.toDateString();
+    let b = t_b.toDateString();
+    document.getElementById("tampil_tanggal").innerHTML = "<b>" + a + "</b>" + " " + " s/d " + " " + "<b>" + b + "</b>";
   }
+
   function fungsi_tutup_modal() {
     $('#modal_proses_tanggal').modal('hide');
     $(".preloader").fadeIn();

@@ -25,7 +25,7 @@
       </div>
       <br>
       <?php $validation = \Config\Services::validation(); ?>
-      <form action="<?= base_url(); ?>/analisis/iterasi_klaster" method="post">
+      <form action="<?= base_url(); ?>/analisis/iterasi_klaster" method="post" name="form">
         <?= csrf_field() ?>
         <div class="card-body row">
           <div class="col-md-5 text-center">
@@ -58,16 +58,8 @@
                 <label for="sedikit">Sedikit di Beli</label>&nbsp;&nbsp;
                 <input type="radio" name="data_analisis" id="data_analisis" placeholder="banyak" value="banyak">
                 <label for="banyak">Banyak di Beli</label><br>
-              </div>
-              <div class="form-group col-md-6">
-                <span id="pilihan_centroid">
-                  <label class="font-weight-bold mb-4">Centroid Klaster</label>
-                  <br>
-                  <input type="radio" name="centroid" value="random" checked placeholder="random">
-                  <label for="html">Random</label>&nbsp;&nbsp;
-                  <input type="radio" name="centroid" value="akurasi" placeholder="akurasi">
-                  <label for="css">Pilih</label><br>
-                </span>
+                <input type="radio" name="data_analisis" id="data_analisis" placeholder="gabungan" value="gabungan">
+                <label for="banyak">Gabungan Keduanya</label>
               </div>
             </span>
             <span class="row">
@@ -96,6 +88,7 @@
           <a href="#" class="btn btn-success btn-sm mb-2" data-toggle="modal" data-target="#modal_proses_klaster"><i class="fa fa-save"></i> Proses</a>
           <button type="reset" class="btn btn-info btn-sm mb-2"><i class="fa fa-refresh"></i> Reset</button>
           <button type="reset" class="btn btn-warning text-light btn-sm mb-2" id="lihat4"><i class="fa fa-eye"></i> Lihat Preprocesing</button>
+          <input type="checkbox" id="pilihan_centroid" name="centroid" value="pilih" placeholder="pilih">
         </div>
         <!-- Modal action -->
         <div class="modal fade" id="modal_proses_klaster" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="modal_proses_klaster" aria-hidden="true">
@@ -183,24 +176,40 @@
 <script type="text/javascript">
   function Angkadesimal(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && charCode != 46 && (charCode < 48 || charCode > 57))
+    if (charCode > 31 && charCode != 46 && (charCode < 48 || charCode > 57)) {
+      if (charCode == 44) {
+      alert('untuk koma (,) menggunakan titik (.)');
+      }
+      alert('tidak boleh disi selain angka dan titik');
       return false;
+    }
     return true;
   }
+
 
   function Angkasaja(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57))
       return false;
+    if (form.klaster.value.length < 1) {
+      if (charCode == 48) {
+        return false;
+      } else if (charCode == 49) {
+        alert('tidak boleh di isi dengan angka 1');
+        return true
+      }
+    }
     return true;
   }
+
+
+
 </script>
 <script>
   $(document).ready(function() {
     $("#pilihan_centroid").hide();
     $("#lihat_data").hide();
   });
-
   function myFunction() {
     var x = document.getElementById("klaster").value;
     if (x == 3) {
