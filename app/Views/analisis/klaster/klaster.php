@@ -57,9 +57,12 @@
                 <input type="radio" name="data_analisis" id="data_analisis" placeholder="sedikit" value="sedikit" checked>
                 <label for="sedikit">Sedikit di Beli</label>&nbsp;&nbsp;
                 <input type="radio" name="data_analisis" id="data_analisis" placeholder="banyak" value="banyak">
-                <label for="banyak">Banyak di Beli</label><br>
+                <label for="banyak">Banyak di Beli</label>
+                <span id="gabungan">
+                <br>
                 <input type="radio" name="data_analisis" id="data_analisis" placeholder="gabungan" value="gabungan">
-                <label for="banyak">Gabungan Keduanya</label>
+                <label for="banyak"><small>Gabungan Keduanya</small></label>
+                </span>
               </div>
             </span>
             <span class="row">
@@ -208,14 +211,17 @@
 <script>
   $(document).ready(function() {
     $("#pilihan_centroid").hide();
+    $("#gabungan").hide();
     $("#lihat_data").hide();
   });
   function myFunction() {
     var x = document.getElementById("klaster").value;
-    if (x == 3) {
+    if (x === 3 || x>2) {
       $("#pilihan_centroid").show();
-    } else {
+      $("#gabungan").show();
+    }else {
       $("#pilihan_centroid").hide();
+      $("#gabungan").hide();
     }
   }
   $("#tutup4").hide();
