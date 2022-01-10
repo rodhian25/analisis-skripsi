@@ -1021,7 +1021,7 @@ $this->m_klaster = new KlasterModel();
 
 
     </div>
-    <a href="<?php base_url() ?>/analisis/klaster" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
+    <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
     <?php if ($rt2 >= 0.25) {  ?>
       <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm"><i class="fa fa-calculator"></i> Buka Perhitungan</a>
       <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i> Tutup Perhitungan</a>
