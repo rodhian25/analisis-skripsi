@@ -91,6 +91,7 @@
   </p>
   <?php
   $pilih = $cari_klaster->c;
+  $pilih2 = $cari_klaster_2;
   ?>
   <?php
   $d1 = count($data);
@@ -183,7 +184,7 @@
     <?php for ($z = 1; $z <= $ops; $z++) { ?>
       <tr>
         <td style="padding:2px;text-align:center;"><?= $z + 8 ?></td>
-        <td style="padding:2px 8px;">Klaster - <?= $z ?><span><?php if ('c' . $z == $pilih) {
+        <td style="padding:2px 8px;">Klaster - <?= $z ?><span><?php if ('c' . $z == $pilih || 'c' . $z == $pilih2) {
                                                                 echo ' (dianalisis)';
                                                               }  ?></span></td>
         <?php $q3 = $this->db->query("SELECT c, count(c) as t FROM hasil_klaster where c = 'c$z'")->getResultObject(); ?>
@@ -216,7 +217,7 @@
         <td style="padding:2px;text-align:center;"><?= $hk->jumlah ?></td>
         <td style="padding:2px;text-align:center;"><?= $hk->harga ?></td>
         <td style="padding:2px;text-align:center;"><?= preg_replace("/c/", "", $hk->c); ?>
-          <span><?php if ($hk->c == $pilih) {
+          <span><?php if ($hk->c == $pilih || $hk->c == $pilih2) {
                   echo ' (dianalisis)';
                 }  ?></span>
         </td>
@@ -253,7 +254,7 @@
             </tr>
             <?php foreach ($b as $l) { ?>
               <tr>
-                <td style="padding:5px 8px;"><?= $l->c ?><span><?php if ($l->c == $pilih) {
+                <td style="padding:5px 8px;"><?= $l->c ?><span><?php if ($l->c == $pilih || $l->c == $pilih2) {
                                                                   echo ' (dianalisis)';
                                                                 }  ?></span></td>
                 <td style="padding:5px 8px;"><?= $l->jumlah ?></td>
@@ -310,7 +311,7 @@
     for ($j = 1; $j <= $ops; $j++) { ?>
       <tr>
         <td style="padding:5px 8px;"><?= $no++ ?></td>
-        <td style="padding:5px 8px;">klaster <?= $j ?><?php if ('c' . $j == $pilih) {
+        <td style="padding:5px 8px;">klaster <?= $j ?><?php if ('c' . $j == $pilih || 'c' . $j == $pilih2) {
                                                         echo ' (dianalisis)';
                                                       }  ?></span></td>
         <?php
@@ -514,9 +515,9 @@
     <tr>
       <td style="padding:5px 8px;text-align:center;"> - </td>
       <td style="padding:5px 8px;text-align:center;"> A U B </td>
-      <td colspan=2 style="padding:5px 8px;text-align:center;"> support ( A U B ) / Jumlah Transaksi </td>
-      <td colspan=2 style="padding:5px 8px;text-align:center;"> support ( A U B ) / support ( A ) </td>
-      <td colspan=2 style="padding:5px 8px;text-align:center;"> confidence ( B U A ) / ( support ( A ) / Jumlah Transaksi )</td>
+      <td colspan=2 style="padding:5px 8px;text-align:center;"> Kemunculan ( A U B ) / Jumlah Transaksi </td>
+      <td colspan=2 style="padding:5px 8px;text-align:center;"> Kemunculan ( A U B ) / support ( A ) </td>
+      <td colspan=2 style="padding:5px 8px;text-align:center;"> ( Confidence ( A U B ) ) / ( Benchmark Confience (A, B) )</td>
     </tr>
     <?php $no = 1;
     foreach ($hasils as $row) { ?>
@@ -559,27 +560,52 @@
       <th style="font-weight:600;padding:5px 8px;text-align:center;">Produk</th>
       <th style="font-weight:600;padding:5px 8px;text-align:center;">Harga</th>
     </tr>
+    <?php
+    //fungsi agar mendapatkan array di dalam string
+    function penjabaran($x)
+    {
+      $cobak = $x;
+      $input = explode(", ", $cobak);
+      $output = implode("','", array_map(
+        function ($v, $k) {
+          if (is_array($v)) {
+            return $k . '[]=' . implode('&' . $k . '[]=', $v);
+          } else {
+            return $v;
+          }
+        },
+        $input,
+        array_keys($input)
+      ));
+      return $output;
+    }
+
+    ?>
     <?php $no = 1;
     foreach ($hasils as $row) { ?>
       <tr>
         <td style="padding:5px 8px;"><?= $no++ ?></td>
         <td style="padding:5px 8px;"><?= $row->left_item ?></td>
         <?php
-        $query = $this->db->query("SELECT item_produk, (harga/jumlah) as peritem from data where item_produk in('$row->left_item') limit 1");
+        $left_produk = penjabaran($row->left_item);
+        $query = $this->db->query("SELECT distinct item_produk, (harga/jumlah) as peritem from data where item_produk in('$left_produk')");
         $hasils = $query->getResultObject();
         ?>
         <td style="padding:5px 8px;text-align:center;"><?php foreach ($hasils as $rows) { ?>
-            <?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?>
-          <?php } ?></td>
+            <span style="margin-right:35px"><?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?></span>
+          <?php } ?>
+        </td>
         <?php
-        $querys = $this->db->query("SELECT item_produk, (harga/jumlah) as peritem from data where item_produk in('$row->right_item') limit 1");
+        $right_produk = penjabaran($row->right_item);
+        $querys = $this->db->query("SELECT distinct item_produk, (harga/jumlah) as peritem from data where item_produk in('$right_produk')");
         $hasilss = $querys->getResultObject();
         ?>
         <td style="padding:5px 8px;text-align:center;"> => </td>
         <td style="padding:5px 8px;"><?= $row->right_item ?></td>
         <td style="padding:5px 8px;text-align:center;"><?php foreach ($hasilss as $rows) { ?>
-            <?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?>
-          <?php } ?></td>
+            <span style="margin-right:35px"><?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?></span>
+          <?php } ?>
+        </td>
       </tr>
     <?php } ?>
   </table>

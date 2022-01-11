@@ -925,7 +925,7 @@ $this->m_klaster = new KlasterModel();
       //jika yang dipilih banyak dalam gabungan
       foreach ($hasilsmaxgbn as $ttt) {
         $pilihmaxgbn = $ttt->c;
-    }
+      }
     }
     //jika yang dipilih antra sedikit atau banyak, dan juga untuk yang sedikit dalam gabungan
     foreach ($hasils as $tt) {

@@ -65,9 +65,21 @@ class Hasil extends BaseController
     if ($data_analisis == 'banyak') {
       //mendapatkan klaster yang tinggi nilainya
       $var['cari_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1")->getRow();
-    } else {
+      $var['cari_klaster_2'] = '';
+    }
+    else if ($data_analisis == 'sedikit') {
+      //mendapatkan klaster yang tinggi nilainya
+      $var['cari_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1")->getRow();
+      $var['cari_klaster_2'] = '';
+    }
+    else {
       //mendapatkan klaster yang terendah nilainya
       $var['cari_klaster'] = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1")->getRow();
+      $pilih_max = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1")->getResultObject();
+      foreach ($pilih_max as $ttt) {
+        $pilihs_max = $ttt->c;
+      }
+      $var['cari_klaster_2'] = $pilihs_max;
     }
 
     return view('hasil/download', $var);

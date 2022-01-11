@@ -137,6 +137,27 @@
               </tr>
             </thead>
             <tbody>
+              <?php
+              //fungsi agar mendapatkan array di dalam string
+              function penjabaran($x)
+              {
+                $cobak = $x;
+                  $input = explode(", ", $cobak);
+                  $output = implode("','", array_map(
+                    function ($v, $k) {
+                      if (is_array($v)) {
+                        return $k . '[]=' . implode('&' . $k . '[]=', $v);
+                      } else {
+                        return $v;
+                      }
+                    },
+                    $input,
+                    array_keys($input)
+                  ));
+                  return $output;
+              }
+
+              ?>
               <?php $no = 1;
               $this->db = \Config\Database::connect();
               foreach ($hasil as $row) { ?>
@@ -144,22 +165,24 @@
                   <td><?= $no++ ?></td>
                   <td><?= $row->left_item ?></td>
                   <?php
-                  $query = $this->db->query("SELECT item_produk, (harga/jumlah) as peritem from data where item_produk in('$row->left_item') limit 1");
+                  $left_produk = penjabaran($row->left_item);
+                  $query = $this->db->query("SELECT distinct item_produk, (harga/jumlah) as peritem from data where item_produk in('$left_produk')");
                   $hasils = $query->getResultObject();
                   ?>
                   <td>
                     <?php foreach ($hasils as $rows) { ?>
-                      <?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?>
+                      <span style="margin-right:35px"><?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?></span>
                     <?php } ?>
                   </td>
                   <td><?= $row->right_item ?></td>
                   <?php
-                  $querys = $this->db->query("SELECT item_produk, (harga/jumlah) as peritem from data where item_produk in('$row->right_item') limit 1");
+                  $right_produk = penjabaran($row->right_item);
+                  $querys = $this->db->query("SELECT distinct item_produk, (harga/jumlah) as peritem from data where item_produk in('$right_produk')");
                   $hasilss = $querys->getResultObject();
                   ?>
                   <td>
                     <?php foreach ($hasilss as $rows) { ?>
-                      <?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?>
+                      <span style="margin-right:35px"><?= "Rp " . number_format($rows->peritem, 0, ".", ".") ?></span>
                     <?php } ?>
                   </td>
                 </tr>
