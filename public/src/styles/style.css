@@ -97,50 +97,7 @@ p {
 /*==============================================================
 	Global Styles Start
 ==============================================================*/
-.pre-loader{
-	background: #ffffff;
-	background-position: center center;
-	background-size: 13%;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 12345;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-}
-.pre-loader .loader-logo{
-	padding-bottom: 15px;
-}
-.pre-loader .loader-progress{
-	height: 8px;
-	border-radius: 15px;
-	max-width: 200px;
-	margin: 0 auto;
-	display: block;
-	background: #ecf0f4;
-	overflow: hidden;
-}
-.pre-loader .bar{
-	width: 0%;
-	height: 8px;
-	display: block;
-	background: #1b00ff;
-}
-.pre-loader .percent{
-	text-align: center;
-	font-size: 24px;
-	display: none;
-}
-.pre-loader .loading-text{
-	text-align: center;
-	font-size: 18px;
-	font-weight: 500;
-	padding-top: 15px;
-}
+
 
 .mx-w-150{max-width: 150px;}
 .mx-h-300{max-height: 300px;}
@@ -213,7 +170,7 @@ p {
 }
 .h4,
 .page-header h4{
-	font-size: 20px;
+	font-size: 19px;
 	font-weight: 700;
 	line-height: 1.35;
 	color: #1b3133;
@@ -554,7 +511,6 @@ textarea.form-control{
 }
 .form-control-success{
 	border-color: #28a745;
-	background-image: url(../images/check-mark-green.png);
 	background-repeat: no-repeat;
 	background-position: center right 10px;
 	background-size: 20px 20px;
