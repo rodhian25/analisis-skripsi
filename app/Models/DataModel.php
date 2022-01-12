@@ -55,11 +55,13 @@ class DataModel extends Model
     //mengambil data dari data berdasarkan tanggal inputan
     $query   = $this->db->query("SELECT sum(jumlah) as item, jumlah, item_produk, harga from data WHERE tanggal>='$tanggal_awal' AND tanggal<='$tanggal_akhir' GROUP BY item_produk");
     $hasil = $query->getResultObject();
+    $sql = "INSERT INTO hasil_processing(item_produk, jumlah, harga) VALUES ";
     foreach ($hasil as $key) {
       $harga = intval(($key->harga) / $key->jumlah) / 1000;
-      $q3 = "insert into hasil_processing(item_produk,jumlah,harga) values('" . $key->item_produk . "'," . intval($key->item) . "," . $harga . ")";
-      $this->db->query($q3);
+      $sql .= "('" . $key->item_produk . "'," . intval($key->item) . "," . $harga . "), ";
     }
+    $sql = rtrim($sql, ', ');
+    $this->db->query($sql);
   }
 
 
@@ -143,16 +145,17 @@ class DataModel extends Model
   function buat_tampil_produk()
   {
     $query = $this->db->query("SELECT sum(jumlah) as item, item_produk, harga, jumlah, jenis from data GROUP BY item_produk");
+    $sql = "INSERT INTO data_produk(item, item_produk, harga, jumlah) VALUES ";
     foreach ($query->getResultObject() as $key) {
-      $q3 = "insert into data_produk(item, item_produk, harga, jumlah) values(" . $key->item . ",'" . $key->item_produk . "','" . $key->harga . "','" . $key->jumlah . "')";
-      $this->db->query($q3);
+      $sql .= "(" . $key->item . ",'" . $key->item_produk . "','" . $key->harga . "','" . $key->jumlah . "'), ";
     }
+    $sql = rtrim($sql, ', ');
+    $this->db->query($sql);
   }
 
   function ubah_jenis_produk($jenis, $id)
   {
     $jumlah_dipilih = count($id);
-
     for ($x = 0; $x < $jumlah_dipilih; $x++) {
       $query = "UPDATE data_produk SET jenis ='" . $jenis . "' WHERE id='$id[$x]'";
       $this->db->query($query);

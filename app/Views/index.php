@@ -1,20 +1,7 @@
 <?= $this->extend('/layouts/layout') ?>
 
 <?= $this->section('css_scripts') ?>
-<style>
-  @import 'https://code.highcharts.com/css/highcharts.css';
-
-  #container {
-    height: 400 px;
-    min-width: 300 px;
-    max-width: 800 px;
-    margin: 0 auto;
-  }
-</style>
-<?php $this->db = \Config\Database::connect(); ?>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/highcharts.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('main-container') ?>
@@ -146,7 +133,7 @@
       <div class="col-xl-8 col-md-8 mb-30">
         <div class="card-box height-100-p pd-20">
           <h2 class="h4 mb-20">Grafik Pembelian Produk</h2>
-          <div id="container"></div>
+          <div id="container" style="height: 400 px;min-width: 300 px;max-width: 800 px;margin: 0 auto;"></div>
           <br>
           <hr><br>
           <div class="row">
@@ -299,6 +286,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageScripts') ?>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script>
   Highcharts.chart('container', {
     chart: {
@@ -391,7 +381,7 @@
   });
 </script>
 
-
+<?php $this->db = \Config\Database::connect(); ?>
 <script>
   Highcharts.chart('containers', {
     chart: {

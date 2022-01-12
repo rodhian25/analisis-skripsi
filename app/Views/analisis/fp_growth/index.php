@@ -327,11 +327,12 @@ ini_set('memory_limit', '10240M');
               //menghapus hasil tabel hasil_asosiasi
               $this->db = \Config\Database::connect();
               $this->db->query("TRUNCATE hasil_asosiasi");
+              $sql = "INSERT INTO hasil_asosiasi (left_item, right_item, supp, conf, lift)
+              VALUES";
               foreach ($ass as $key => $val) :
                 if ($val['conf'] >= $con / 100) :
                   //insert hasil asosiasi ke hasil_asosiasi
-                  $this->db->query("INSERT INTO hasil_asosiasi (left_item, right_item, supp, conf, lift) 
-                        VALUES ('" . implode(', ', $val['left']) . "', '" . implode(', ', $val['right']) . "', '$val[sup]', '$val[conf]', '$val[lr]')");
+                  $sql .= "('" . implode(', ', $val['left']) . "','" . implode(', ', $val['right']) . "'," . $val['sup'] . "," . $val['conf'] . "," . $val['lr'] . "), ";
               ?>
                   <tr class="<?= $val['conf'] >= $con / 100 ? '' : 'danger' ?>">
                     <td><?= $no++ ?></td>
@@ -361,7 +362,10 @@ ini_set('memory_limit', '10240M');
                     <td class="text-center">( <?= $val['a'] ?> / <?= $val['a'] / ($val['lr'] * ($val['b'] / $val['total'])) ?> ) / ( <?= $val['b'] ?> / <?= $val['total'] ?> ) = <?= round($val['lr'], 2) ?></td>
                   </tr>
               <?php endif;
-              endforeach ?>
+              endforeach;
+              $sql = rtrim($sql, ', ');
+              $this->db->query($sql);
+              ?>
             </tbody>
           </table>
         </div>
@@ -583,7 +587,7 @@ ini_set('memory_limit', '10240M');
   });
 </script>
 <script>
-    function fungsi_tutup_modall() {
+  function fungsi_tutup_modall() {
     $('#Medium-modal').modal('hide');
     $(".preloader").fadeIn();
   }

@@ -10,7 +10,7 @@
         <li class="breadcrumb-item"><?= $title ?></li>
       </ol>
     </nav>
-    <br />
+    <br>
     <!---->
 
     <?= $this->include('/layouts/loading') ?>
