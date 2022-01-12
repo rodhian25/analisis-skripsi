@@ -8,12 +8,18 @@
 
 <?php
 
-use App\Models\AsosiasiModel;
 use App\Models\KlasterModel;
 
 $this->db = \Config\Database::connect();
-$this->m_asosiasi = new AsosiasiModel();
 $this->m_klaster = new KlasterModel();
+
+//rumus mencari jarak antar medoid dengan manhattan
+function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroidHarga)
+{
+  $h[$perulangan] = abs((($jumlahnya - $centroidJumlah[$perulangan])) - (($harganya - $centroidHarga[$perulangan])));
+  echo $h[$perulangan];
+  return $h[$perulangan];
+}
 ?>
 
 <div class="main-container">
@@ -127,8 +133,7 @@ $this->m_klaster = new KlasterModel();
                     $tc = array(); ?>
                     <?php foreach ($produk_rand as $k) { ?>
                       <td class="align-middle" colspan="2">
-                        <?php $hm[$e] = abs((($key->jumlah - $c_jumlah[$e])) - (($key->harga - $c_harga[$e])));
-                        echo $hm[$e];
+                        <?php $hm[$e] = manhattan($e, $key->jumlah, $key->harga, $c_jumlah, $c_harga);
                         $hc[$e] = $hm[$e]; ?>
                       </td>
                       <?php $e++ ?>
@@ -254,8 +259,7 @@ $this->m_klaster = new KlasterModel();
                     <?php foreach ($produk_rand2 as $k) { ?>
                       <td class="align-middle" colspan="2">
                         <?php
-                        $hnm[$l] = abs((($key->jumlah - $cn_jumlah[$l])) - (($key->harga - $cn_harga[$l])));
-                        echo $hnm[$l];
+                        $hnm[$l] = manhattan($l, $key->jumlah, $key->harga, $cn_jumlah, $cn_harga);
                         $hcnm[$l] = $hnm[$l];
                         ?>
                       </td>
@@ -900,34 +904,27 @@ $this->m_klaster = new KlasterModel();
 
 
     <?php
-    if ($data_analisis == 'banyak')
-    {
+    $max = "SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1";
+    $min = "SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1";
+
+    $pilihmaxgbn = '';
+    if ($data_analisis == 'banyak') {
       //mendapatkan klaster yang tertinggi nilainya
-      $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1");
-      $hasils = $querys->getResultObject();
-      $pilihmaxgbn ='';
-    }
-    elseif ($data_analisis == 'sedikit')
-    {
+      $varb = $max;
+    } elseif ($data_analisis == 'sedikit') {
       //mendapatkan klaster yang terendah nilainya
-      $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1");
-      $hasils = $querys->getResultObject();
-      $pilihmaxgbn ='';
-    }
-    else
-    {
-      //mendapatkan klaster yang terendah nilainya
-      $querys = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah asc limit 1");
-      $hasils = $querys->getResultObject();
-      //mendapatkan klaster yang tertinggi nilainya
-      $queryss = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing order by jumlah desc limit 1");
-      $hasilsmaxgbn = $queryss->getResultObject();
+      $varb = $min;
+    } else {
+      $varb = $min;
+      $hasilsmaxgbn = $this->db->query($max)->getResultObject();
       //jika yang dipilih banyak dalam gabungan
       foreach ($hasilsmaxgbn as $ttt) {
         $pilihmaxgbn = $ttt->c;
       }
     }
+
     //jika yang dipilih antra sedikit atau banyak, dan juga untuk yang sedikit dalam gabungan
+    $hasils = $this->db->query($varb)->getResultObject();
     foreach ($hasils as $tt) {
       $pilih = $tt->c;
     }
