@@ -891,7 +891,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
               <?php
               $query5 = $this->db->query('SELECT max(tahapan) as tahapan FROM centroid');
               $hasil5 = $query5->getResultObject();
-              foreach ($hasil as $t) {
+              foreach ($hasil5 as $t) {
                 $tahapan = $t->tahapan;
               }
               ?>
