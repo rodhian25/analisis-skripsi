@@ -122,7 +122,7 @@
 
     <div class="card shadow my-5">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Paket Rekomendasi</h6>
+        <h6 class="m-0 font-weight-bold text-dark"><i class="fa fa-table"></i> Paket Rekomendasi Promosi</h6>
       </div>
       <div class="card-body">
         <span id="hasil-si">

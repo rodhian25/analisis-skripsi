@@ -1,4 +1,4 @@
-<?= $this->extend('\layouts\layout') ?>
+<?= $this->extend('/layouts/layout') ?>
 
 <!-- rendering tambahan css -->
 <?= $this->section('css_scripts') ?>
