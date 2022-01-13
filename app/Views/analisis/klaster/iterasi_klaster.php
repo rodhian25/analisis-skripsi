@@ -214,7 +214,6 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 <?php }
                 $sqlc2 = rtrim($sqlc2, ', ');
                 $this->db->query($sqlc2); ?>
-                ?>
               </tbody>
             </table>
           </div>
