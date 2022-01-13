@@ -793,14 +793,15 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     <?php $no++ ?>
                     <td>
                       <?php
+                      $sindex = ['CLUSTERING STRUKTUR KUAT','CLUSTERING STRUKTUR SEDANG','CLUSTERING STRUKTUR LEMAH','CLUSTERING TIDAK TERSTRUKTUR'];
                       if ($jms >= 0.7 and $jms <= 1) {
-                        $tampil = "CLUSTERING STRUKTUR KUAT";
+                        $tampil = $sindex[0];
                       } else if ($jms >= 0.5) {
-                        $tampil = "CLUSTERING STRUKTUR SEDANG";
+                        $tampil = $sindex[1];
                       } else if ($jms >= 0.25) {
-                        $tampil = "CLUSTERING STRUKTUR LEMAH";
+                        $tampil = $sindex[2];
                       } else {
-                        $tampil = "CLUSTERING TIDAK TERSTRUKTUR";
+                        $tampil = $sindex[3];
                       }
                       echo $tampil;
                       ?>
@@ -820,13 +821,13 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <th colspan="2">
                     <?php
                     if ($rt2 >= 0.7 and $rt2 <= 1) {
-                      $tampils = 'CLUSTERING STRUKTUR KUAT';
+                      $tampils = $sindex[0];
                     } else if ($rt2 >= 0.5) {
-                      $tampils = 'CLUSTERING STRUKTUR SEDANG';
+                      $tampils = $sindex[1];
                     } else if ($rt2 >= 0.25) {
-                      $tampils = 'CLUSTERING STRUKTUR LEMAH';
+                      $tampils = $sindex[2];
                     } else {
-                      $tampils = 'CLUSTERING TIDAK TERSTRUKTUR';
+                      $tampils = $sindex[3];
                     }
                     echo "$tampils <a href='#' data-toggle='modal' data-target='#range-si' type='button'><i class='icon-copy ion-information-circled'></i></a>";
                     ?>
