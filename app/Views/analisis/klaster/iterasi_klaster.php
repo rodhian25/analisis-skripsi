@@ -28,6 +28,8 @@ function cnto($centroid, $posisi)
   $i++;
 }
 
+
+
 //mendapatkan centroid untuk perhitungan manhattan
 function centroids($centroidss)
 {
@@ -404,25 +406,9 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     foreach ($hasil_qs as $twr) {
                       $jumlah_klaster = $twr->klaster;
                     }
-                    $sqlc3 = "INSERT INTO centroid(fk_id_processing, jumlah, harga, tahapan, c) VALUES ";
                     $produk_rand3[$iterasi] = $this->m_klaster->getProdukRand($jumlah_klaster);
-                    $no = 1 ?>
-                    <?php foreach ($produk_rand3[$iterasi] as $m1) { ?>
-                      <tr class="text-center">
-                        <td><?= $no ?></td>
-                        <td><?= $m1['id_processing'] ?></td>
-                        <td class="text-left"><?= $m1['item_produk'] ?></td>
-                        <td><?= $m1['jumlah'] ?></td>
-                        <td><?= $m1['harga'] ?></td>
-                        <?php $itr = $iterasi + 2 ?>
-                        <?php $sqlc3 .= "(" . $m1['id_processing'] . "," . $m1['jumlah'] . "," . $m1['harga'] . "," . $itr . ",'c" . $no . "'), ";
-                        ?>
-                      </tr>
-                      <?php $no++ ?>
-                    <?php }
-                    $sqlc3 = rtrim($sqlc3, ', ');
-                    $this->db->query($sqlc3);
-                    ?>
+                    $itr = $iterasi + 2; ?>
+                    <?php perhitungan_centroid($produk_rand3[$iterasi], $itr); ?>
                   </tbody>
                 </table>
               </div>
