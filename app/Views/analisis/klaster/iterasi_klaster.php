@@ -5,13 +5,59 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main-container') ?>
-
 <?php
 
 use App\Models\KlasterModel;
 
 $this->db = \Config\Database::connect();
 $this->m_klaster = new KlasterModel();
+
+//nampilin tulisan centroid 1,2,.. di bagian header tabel perhitungan
+function cnto($centroid, $posisi)
+{
+  for ($i = 1; $i <= count($centroid); $i++) {
+    $bagian2 = "Centroid ";
+    if ($posisi == 1) {
+      $bagian = "colspan=2";
+    } else {
+      $bagian = "rowspan=2";
+      $bagian2 = "C";
+    }
+    echo '<th ' . $bagian . ' >' . $bagian2 . '' . $i . '</th>';
+  }
+  $i++;
+}
+
+//mendapatkan centroid untuk perhitungan manhattan
+function centroids($centroidss)
+{
+  foreach ($centroidss as $m1) {
+    $c_jumlah[] = $m1['jumlah'];
+    $c_harga[] = $m1['harga'];
+  }
+  return array($c_jumlah, $c_harga);
+}
+
+//menampilkan centroid dan memasukkan centroid ke database
+function perhitungan_centroid($centroidsss, $tahap)
+{
+  $sqlc1 = "INSERT INTO centroid(fk_id_processing, jumlah, harga, tahapan, c) VALUES ";
+  $no = 1;
+  foreach ($centroidsss as $m1) {
+    echo '<tr class="text-center">
+          <td>' . $no . '</td>
+          <td>' . $m1['id_processing'] . '</td>
+          <td class="text-left">' . $m1['item_produk'] . '</td>
+          <td>' . $m1['jumlah'] . '</td>
+          <td>' . $m1['harga'] . '</td>';
+    $sqlc1 .= "(" . $m1['id_processing'] . "," . $m1['jumlah'] . "," . $m1['harga'] . ",$tahap,'c" . $no . "'),";
+    echo '</tr>';
+    $no++;
+  }
+  $sqlc1 = rtrim($sqlc1, ', ');
+  \Config\Database::connect()->query($sqlc1);
+  return $sqlc1;
+}
 
 //rumus mencari jarak antar medoid dengan manhattan
 function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroidHarga)
@@ -20,6 +66,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
   echo $h[$perulangan];
   return $h[$perulangan];
 }
+
 ?>
 
 <div class="main-container">
@@ -46,6 +93,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
         <h4 class="h5 mb-0 text-gray-800"><i class="icon-copy dw dw-analytics-11"></i> Data Pengelompokan Iterasi Ke-1</h4>
       </div>
 
+
       <!-- medoid -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -64,24 +112,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tr>
               </thead>
               <tbody>
-                <?php $sqlc1 = "INSERT INTO centroid(fk_id_processing, jumlah, harga, tahapan, c) VALUES ";  ?>
-                <?php $no = 1 ?>
-                <?php foreach ($produk_rand as $m1) { ?>
-                  <tr class="text-center">
-                    <td><?= $no ?></td>
-                    <td><?= $id = $m1['id_processing'] ?></td>
-                    <td class="text-left"><?= $m1['item_produk'] ?></td>
-                    <td><?= $jmlh = $m1['jumlah'] ?></td>
-                    <td><?= $hrga = $m1['harga'] ?></td>
-                    <?php
-                    $sqlc1 .= "(" . $id . "," . $jmlh . "," . $hrga . ",1,'c" . $no . "'),";
-                    ?>
-                  </tr>
-                  <?php $no++ ?>
-                <?php }
-                $sqlc1 = rtrim($sqlc1, ', ');
-                $this->db->query($sqlc1);
-                ?>
+                <?php perhitungan_centroid($produk_rand, 1); ?>
               </tbody>
             </table>
           </div>
@@ -102,23 +133,15 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <th rowspan="2">Item Produk</th>
                   <th rowspan="2">Jumlah</th>
                   <th rowspan="2">Harga (*1000)</th>
-                  <?php $ct = 1 ?>
-                  <?php foreach ($produk_rand as $m) { ?>
-                    <th colspan="2">Centroid <?= $ct;
-                                              $ct++ ?></th>
-                  <?php } ?>
-                  <?php $d = 1 ?>
-                  <?php foreach ($produk_rand as $m) { ?>
-                    <th rowspan="2">C<?= $d;
-                                      $d++ ?></th>
-                  <?php } ?>
+                  <?php
+                  cnto($produk_rand, 1);
+                  cnto($produk_rand, 2);
+                  ?>
                 </tr>
                 <tr class="text-center">
                   <?php foreach ($produk_rand as $m1) { ?>
-                    <th><?php $c_jumlah[] = $m1['jumlah'];
-                        echo $m1['jumlah'] ?></th>
-                    <th><?php $c_harga[] = $m1['harga'];
-                        echo $m1['harga'] ?></th>
+                    <th><?= $m1['jumlah'] ?></th>
+                    <th><?= $m1['harga'] ?></th>
                   <?php } ?>
                 </tr>
               </thead>
@@ -138,7 +161,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     $tc = array(); ?>
                     <?php foreach ($produk_rand as $k) { ?>
                       <td class="align-middle" colspan="2">
-                        <?php $hm[$e] = manhattan($e, $key->jumlah, $key->harga, $c_jumlah, $c_harga);
+                        <?php $hm[$e] = manhattan($e, $key->jumlah, $key->harga, centroids($produk_rand)[0], centroids($produk_rand)[1]);
                         $hc[$e] = $hm[$e]; ?>
                       </td>
                       <?php $e++ ?>
@@ -175,8 +198,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
         </div>
       </div>
       </br>
-      <hr>
-      <br>
+      <hr><br>
+
+
+
+
 
 
       <!-- non medoids -->
@@ -197,23 +223,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tr>
               </thead>
               <tbody>
-                <?php $sqlc2 = "INSERT INTO centroid(fk_id_processing, jumlah, harga, tahapan, c) VALUES "; ?>
-                <?php $nom = 1 ?>
-                <?php foreach ($produk_rand2 as $nm1) { ?>
-                  <tr class="text-center">
-                    <td><?= $nom ?></td>
-                    <td><?= $id = $nm1['id_processing'] ?></td>
-                    <td class="text-left"><?= $nm1['item_produk'] ?></td>
-                    <td><?= $jmlh = $nm1['jumlah'] ?></td>
-                    <td><?= $hrga = $nm1['harga'] ?></td>
-                    <?php
-                    $sqlc2 .= "(" . $id . "," . $jmlh . "," . $hrga . ",2,'c" . $nom . "'),";
-                    ?>
-                  </tr>
-                  <?php $nom++ ?>
-                <?php }
-                $sqlc2 = rtrim($sqlc2, ', ');
-                $this->db->query($sqlc2); ?>
+                <?php perhitungan_centroid($produk_rand2, 2); ?>
               </tbody>
             </table>
           </div>
@@ -234,23 +244,15 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <th rowspan="2">Item Produk</th>
                   <th rowspan="2">Jumlah</th>
                   <th rowspan="2">Harga (*1000)</th>
-                  <?php $f = 1 ?>
-                  <?php foreach ($produk_rand2 as $m) { ?>
-                    <th colspan="2">Centroid <?= $f;
-                                              $f++ ?></th>
-                  <?php } ?>
-                  <?php $g = 1 ?>
-                  <?php foreach ($produk_rand2 as $m) { ?>
-                    <th rowspan="2">C<?php echo $g;
-                                      $g++ ?></th>
-                  <?php } ?>
+                  <?php
+                  cnto($produk_rand2, 1);
+                  cnto($produk_rand2, 2);
+                  ?>
                 </tr>
                 <tr class="text-center">
                   <?php foreach ($produk_rand2 as $nm1) { ?>
-                    <th><?php $cn_jumlah[] = $nm1['jumlah'];
-                        echo $nm1['jumlah'] ?></th>
-                    <th><?php $cn_harga[] = $nm1['harga'];
-                        echo $nm1['harga'] ?></th>
+                    <th><?= $nm1['jumlah'] ?></th>
+                    <th><?= $nm1['harga'] ?></th>
                   <?php } ?>
                 </tr>
               </thead>
@@ -271,7 +273,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     <?php foreach ($produk_rand2 as $k) { ?>
                       <td class="align-middle" colspan="2">
                         <?php
-                        $hnm[$l] = manhattan($l, $key->jumlah, $key->harga, $cn_jumlah, $cn_harga);
+                        $hnm[$l] = manhattan($l, $key->jumlah, $key->harga, centroids($produk_rand2)[0], centroids($produk_rand2)[1]);
                         $hcnm[$l] = $hnm[$l];
                         ?>
                       </td>
@@ -308,8 +310,12 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
         </div>
       </div>
       </br>
-      <hr>
-      </br>
+      <hr></br>
+
+
+
+
+
 
       <!--menghitung selisih-->
       <div class="card shadow mb-4">
@@ -335,6 +341,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
         </div>
       </div>
       </br>
+
+
+
+
+
 
       <?php $n = "insert into hasil_iterasi(iterasi,total_medoids,total_non_medoids,selisih) values(1," . $tc0 . "," . $tcnm0 . "," . $selisih . ")";
       $this->db->query($n); ?>
@@ -380,6 +391,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <thead class="bg-light-blue text-dark">
                     <tr class="text-center">
                       <th>Centroid ke-</th>
+                      <th>No</th>
                       <th>Item Produk</th>
                       <th>Jumlah</th>
                       <th>harga (*1000)</th>
@@ -392,21 +404,25 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     foreach ($hasil_qs as $twr) {
                       $jumlah_klaster = $twr->klaster;
                     }
+                    $sqlc3 = "INSERT INTO centroid(fk_id_processing, jumlah, harga, tahapan, c) VALUES ";
                     $produk_rand3[$iterasi] = $this->m_klaster->getProdukRand($jumlah_klaster);
                     $no = 1 ?>
                     <?php foreach ($produk_rand3[$iterasi] as $m1) { ?>
                       <tr class="text-center">
                         <td><?= $no ?></td>
+                        <td><?= $m1['id_processing'] ?></td>
                         <td class="text-left"><?= $m1['item_produk'] ?></td>
-                        <td><?= $jmlh = $m1['jumlah'] ?></td>
-                        <td><?= $hrga = $m1['harga'] ?></td>
+                        <td><?= $m1['jumlah'] ?></td>
+                        <td><?= $m1['harga'] ?></td>
                         <?php $itr = $iterasi + 2 ?>
-                        <?php $centroid3 = "insert into centroid(fk_id_processing,jumlah,harga,tahapan,c) values(" . $m1['id_processing'] . "," . $jmlh . "," . $hrga . "," . $itr . ",'c" . $no . "')";
-                        $this->db->query($centroid3);
+                        <?php $sqlc3 .= "(" . $m1['id_processing'] . "," . $m1['jumlah'] . "," . $m1['harga'] . "," . $itr . ",'c" . $no . "'), ";
                         ?>
                       </tr>
                       <?php $no++ ?>
-                    <?php } ?>
+                    <?php }
+                    $sqlc3 = rtrim($sqlc3, ', ');
+                    $this->db->query($sqlc3);
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -428,16 +444,10 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                       <th rowspan="2">Item Produk</th>
                       <th rowspan="2">Jumlah</th>
                       <th rowspan="2">Harga (*1000)</th>
-                      <?php $ct = 1 ?>
-                      <?php foreach ($produk_rand3[$iterasi] as $m) { ?>
-                        <th colspan="2">Centroid <?= $ct;
-                                                  $ct++ ?></th>
-                      <?php } ?>
-                      <?php $d = 1 ?>
-                      <?php foreach ($produk_rand3[$iterasi] as $m) { ?>
-                        <th rowspan="2">C<?= $d;
-                                          $d++ ?></th>
-                      <?php } ?>
+                      <?php
+                      cnto($produk_rand3[$iterasi], 1);
+                      cnto($produk_rand3[$iterasi], 2);
+                      ?>
                     </tr>
                     <tr class="text-center">
                       <?php
@@ -506,6 +516,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           </br>
           <hr>
           </br>
+
+
+
+
+
 
           <!--menghitung selisih-->
           <div class="card shadow mb-4">
@@ -642,6 +657,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           </div>
         </div>
       </div><br>
+
 
 
 
@@ -793,7 +809,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     <?php $no++ ?>
                     <td>
                       <?php
-                      $sindex = ['CLUSTERING STRUKTUR KUAT','CLUSTERING STRUKTUR SEDANG','CLUSTERING STRUKTUR LEMAH','CLUSTERING TIDAK TERSTRUKTUR'];
+                      $sindex = ['CLUSTERING STRUKTUR KUAT', 'CLUSTERING STRUKTUR SEDANG', 'CLUSTERING STRUKTUR LEMAH', 'CLUSTERING TIDAK TERSTRUKTUR'];
                       if ($jms >= 0.7 and $jms <= 1) {
                         $tampil = $sindex[0];
                       } else if ($jms >= 0.5) {
