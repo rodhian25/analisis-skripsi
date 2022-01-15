@@ -112,7 +112,7 @@ class DataModel extends Model
 
   function produk_peritem()
   {
-    return $this->db->query("SELECT item, item_produk, harga, jumlah from data_produk GROUP BY item_produk")->getResultObject();
+    return $this->db->query("SELECT item, item_produk, harga from data_produk GROUP BY item_produk")->getResultObject();
   }
 
   function produk_peritem_urut()
@@ -139,15 +139,15 @@ class DataModel extends Model
 
   function tampil_produk()
   {
-    return $this->db->query("SELECT id, item, item_produk, harga, jumlah, jenis from data_produk")->getResultObject();
+    return $this->db->query("SELECT id, item, item_produk, harga, jenis from data_produk")->getResultObject();
   }
 
   function buat_tampil_produk()
   {
-    $query = $this->db->query("SELECT sum(jumlah) as item, item_produk, harga, jumlah, jenis from data GROUP BY item_produk");
-    $sql = "INSERT INTO data_produk(item, item_produk, harga, jumlah) VALUES ";
+    $query = $this->db->query("SELECT sum(jumlah) as item, item_produk, (harga/jumlah) as price, jenis from data GROUP BY item_produk");
+    $sql = "INSERT INTO data_produk(item, item_produk, harga) VALUES ";
     foreach ($query->getResultObject() as $key) {
-      $sql .= "(" . $key->item . ",'" . $key->item_produk . "','" . $key->harga . "','" . $key->jumlah . "'), ";
+      $sql .= "(" . $key->item . ",'" . $key->item_produk . "','" . $key->price . "'), ";
     }
     $sql = rtrim($sql, ', ');
     $this->db->query($sql);

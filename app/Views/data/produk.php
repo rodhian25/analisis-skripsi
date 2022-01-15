@@ -38,7 +38,7 @@
                 <tr>
                   <td class="text-center"><?= $no++ ?></td>
                   <td><?= $row->item_produk ?></td>
-                  <td>Rp. <?= number_format((($row->harga) / $row->jumlah), 0, "", ".") ?></td>
+                  <td>Rp. <?= number_format(($row->harga), 0, "", ".") ?></td>
                   <td class="
                     <?php if ($row->jenis == 'minuman') {
                       echo "text-primary";

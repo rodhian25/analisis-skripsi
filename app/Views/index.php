@@ -261,7 +261,7 @@
                   <td><?= $i++ ?></td>
                   <td><?= $pt->item_produk; ?></td>
                   <td><?= $pt->item; ?></td>
-                  <td>Rp. <?= number_format((($pt->harga) / $pt->jumlah), 0, "", ".") ?></td>
+                  <td>Rp. <?= number_format(($pt->harga), 0, "", ".") ?></td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -323,7 +323,7 @@
       name: 'Harga Per-Satuan (*1000)',
       data: [
         <?php foreach ($produk_item_urut as $py) { ?>
-          <?= ($py->harga / $py->jumlah) / 1000 ?>,
+          <?= ($py->harga) / 1000 ?>,
         <?php } ?>
       ],
       colorByPoint: true

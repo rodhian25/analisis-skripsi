@@ -144,42 +144,41 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <?php foreach ($produk_rand as $m1) { ?>
                     <th><?= $m1['jumlah'] ?></th>
                     <th><?= $m1['harga'] ?></th>
-                  <?php } ?>
+                  <?php }?>
                 </tr>
               </thead>
               <tbody>
-                <?php $sql1 = "INSERT INTO centroid_temp(jenis, iterasi, c) VALUES ";  ?>
-                <?php $no  = 1;
+                <?php $sql1 = "INSERT INTO centroid_temp(jenis, iterasi, c) VALUES ";
+                $no  = 1;
                 $tc0 = 0;
-                $tc  = 0 ?>
-                <?php foreach ($produk as $key) { ?>
+                $tc  = 0;
+                foreach ($produk as $key) { ?>
                   <tr class="text-center">
                     <td class="align-middle"><?= $no ?></td>
                     <td class="text-left align-middle"><?= $key->item_produk ?></td>
                     <td class="align-middle"><?= $key->jumlah ?></td>
                     <td class="align-middle"><?= $key->harga ?></td>
-                    <?php $no++ ?>
-                    <?php $e = 0;
-                    $tc = array(); ?>
-                    <?php foreach ($produk_rand as $k) { ?>
+                    <?php $no++;
+                    $e = 0;
+                    $tc = array();
+                    foreach ($produk_rand as $k) { ?>
                       <td class="align-middle" colspan="2">
                         <?php $hm[$e] = manhattan($e, $key->jumlah, $key->harga, centroids($produk_rand)[0], centroids($produk_rand)[1]);
                         $hc[$e] = $hm[$e]; ?>
                       </td>
-                      <?php $e++ ?>
-                    <?php } ?>
-                    <?php for ($i = 0; $i < COUNT($hc); $i++) { ?>
-                      <?php if ($hc[$i] == MIN($hc)) {
+                      <?php $e++;
+                    }
+                    ?>
+                    <?php for ($i = 0; $i < COUNT($hc); $i++) {
+                      if ($hc[$i] == MIN($hc)) {
                         echo "<td class='align-middle bg-success text-white font-weight-bold'>1</td>";
                         $cm = $i + 1;
                         $sql1 .= "('M',1,'c" . $cm . "'),";
                       } else {
                         echo "<td class='align-middle'>0</td>";
                       }
-                      ?>
-                    <?php }
-                    ?>
-                    <?php
+                    }
+
                     for ($j = 0; $j < COUNT($hc); $j++) {
                       $tc0 = $tc0 + $hc[$j];
                       $ttc[] = $tc0;
@@ -259,40 +258,38 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tr>
               </thead>
               <tbody>
-                <?php $sql2 = "INSERT INTO centroid_temp(jenis, iterasi, c) VALUES ";  ?>
-                <?php $no = 1;
+                <?php $sql2 = "INSERT INTO centroid_temp(jenis, iterasi, c) VALUES ";
+                $no = 1;
                 $tcnm0 = 0;
-                $tcnm = 0 ?>
-                <?php foreach ($produk as $key) { ?>
+                $tcnm = 0;
+                foreach ($produk as $key) { ?>
                   <tr class="text-center">
                     <td class="align-middle"><?= $no ?></td>
                     <td class="text-left align-middle"><?= $key->item_produk ?></td>
                     <td class="align-middle"><?= $key->jumlah ?></td>
                     <td class="align-middle"><?= $key->harga ?></td>
-                    <?php $no++ ?>
-                    <?php $l = 0;
-                    $tcnm = array(); ?>
-                    <?php foreach ($produk_rand2 as $k) { ?>
+                    <?php $no++;
+                    $l = 0;
+                    $tcnm = array();
+                    foreach ($produk_rand2 as $k) { ?>
                       <td class="align-middle" colspan="2">
                         <?php
                         $hnm[$l] = manhattan($l, $key->jumlah, $key->harga, centroids($produk_rand2)[0], centroids($produk_rand2)[1]);
                         $hcnm[$l] = $hnm[$l];
                         ?>
                       </td>
-                      <?php $l++ ?>
-                    <?php } ?>
-                    <?php for ($i = 0; $i < COUNT($hcnm); $i++) { ?>
-                      <?php if ($hcnm[$i] == MIN($hcnm)) {
+                      <?php $l++;
+                    }
+                    for ($i = 0; $i < COUNT($hcnm); $i++) {
+                      if ($hcnm[$i] == MIN($hcnm)) {
                         echo "<td class='align-middle bg-success text-white font-weight-bold'>1</td>";
                         $cnm = $i + 1;
                         $sql2 .= "('NM',1,'c" . $cnm . "'), ";
                       } else {
                         echo "<td class='align-middle'>0</td>";
                       }
-                      ?>
-                    <?php }
-                    ?>
-                    <?php
+                    }
+
                     for ($j = 0; $j < COUNT($hcnm); $j++) {
                       $tcnm0 = $tcnm0 + $hcnm[$j];
                       $ttcnm[] = $tcnm0;
@@ -350,8 +347,8 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
 
 
       <?php $n = "insert into hasil_iterasi(iterasi,total_medoids,total_non_medoids,selisih) values(1," . $tc0 . "," . $tcnm0 . "," . $selisih . ")";
-      $this->db->query($n); ?>
-      <?php
+      $this->db->query($n);
+
       if ($selisih < 0) {
         //#################################################################
         //lakukan perulangan jika selisih < 0
@@ -407,8 +404,9 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                       $jumlah_klaster = $twr->klaster;
                     }
                     $produk_rand3[$iterasi] = $this->m_klaster->getProdukRand($jumlah_klaster);
-                    $itr = $iterasi + 2; ?>
-                    <?php perhitungan_centroid($produk_rand3[$iterasi], $itr); ?>
+                    $itr = $iterasi + 2;
+                    perhitungan_centroid($produk_rand3[$iterasi], $itr);
+                    ?>
                   </tbody>
                 </table>
               </div>
@@ -446,29 +444,29 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     </tr>
                   </thead>
                   <tbody>
-                    <?php $sql3 = "INSERT INTO centroid_temp(jenis,iterasi,c) VALUES";  ?>
-                    <?php $no = 1;
+                    <?php $sql3 = "INSERT INTO centroid_temp(jenis,iterasi,c) VALUES";
+                    $no = 1;
                     $tcs0 = 0;
-                    $tc = 0 ?>
-                    <?php foreach ($produk as $key) { ?>
+                    $tc = 0; 
+                    foreach ($produk as $key) { ?>
                       <tr class="text-center">
                         <td class="align-middle"><?= $no ?></td>
                         <td class="text-left align-middle"><?= $key->item_produk ?></td>
                         <td class="align-middle"><?= $key->jumlah ?></td>
                         <td class="align-middle"><?= $key->harga ?></td>
-                        <?php $no++ ?>
-                        <?php $e = 0;
-                        $tc = array(); ?>
-                        <?php foreach ($produk_rand3[$iterasi] as $k) { ?>
+                        <?php $no++;
+                        $e = 0;
+                        $tc = array();
+                        foreach ($produk_rand3[$iterasi] as $k) { ?>
                           <td class="align-middle" colspan="2"><?php $hm[$e] = abs((($key->jumlah - ${'jumlah_' . $iterasi}[$e])) - (($key->harga - ${'harga_' . $iterasi}[$e])));
                                                                 echo $hm[$e];
                                                                 $hc[$e] = $hm[$e];
                                                                 ?>
                           </td>
-                          <?php $e++ ?>
-                        <?php } ?>
-                        <?php for ($i = 0; $i < COUNT($hc); $i++) { ?>
-                          <?php if ($hc[$i] == MIN($hc)) { ?>
+                          <?php $e++;
+                        }
+                        for ($i = 0; $i < COUNT($hc); $i++) {
+                          if ($hc[$i] == MIN($hc)) { ?>
                             <td class='align-middle bg-success text-white font-weight-bold'>1</td>
                           <?php
                             $cm = $i + 1;
@@ -477,9 +475,8 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                           } else {
                             echo "<td>0</td>";
                           }
-                          ?>
-                        <?php } ?>
-                        <?php
+                        }
+
                         for ($j = 0; $j < COUNT($hc); $j++) {
                           $tcs0 = $tcs0 + $hc[$j];
                           $ttc[] = $tcs0;
@@ -581,8 +578,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           <?php foreach ($centroid_temp_by_c as $val) {
             $c[] = $val->c;
           }
-          ?>
-          <?php foreach ($centroid_temp_by_iterasi as $key) {
+          foreach ($centroid_temp_by_iterasi as $key) {
             $jika2 = "";
             if ($key->it == 1) {
               $it = $key->it;
@@ -603,7 +599,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           <div class="table-responsive">
             <table class="data-table table hover multiple-select-row nowrap" width="100%" cellspacing="0">
               <thead class="bg-light-blue text-dark">
-                <tr align="center">
+                <tr class="text-center">
                   <th width="5%">No</th>
                   <th>Item Produk</th>
                   <?php for ($i = 0; $i < count($c); $i++) { ?>
@@ -614,13 +610,13 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tr>
               </thead>
               <tbody>
-                <?php $sql4 = "INSERT INTO hasil_klaster(fk_id_processing,c) VALUES"; ?>
-                <?php foreach ($produk as $key) { ?>
-                  <tr align="center">
+                <?php $sql4 = "INSERT INTO hasil_klaster(fk_id_processing,c) VALUES";
+                foreach ($produk as $key) { ?>
+                  <tr class="text-center">
                     <td class="align-middle"><?= $no + 1 ?></td>
                     <td class="align-middle text-left"><?= $key->item_produk ?></td>
-                    <?php for ($k = 0; $k < count($c); $k++) { ?>
-                      <?php if ($hasil_q2[$no] == $c[$k]) { ?>
+                    <?php for ($k = 0; $k < count($c); $k++) {
+                      if ($hasil_q2[$no] == $c[$k]) { ?>
                         <td class='align-middle bg-success text-white font-weight-bold'>1</td>
                         <?php $kk = $k + 1; ?>
                         <?php
@@ -628,8 +624,9 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         ?>
                       <?php } else {
                         echo "<td>0</td>";
-                      } ?>
-                    <?php } ?>
+                      }
+                    }
+                    ?>
                     <td class="align-middle"><?= $key->jumlah ?></td>
                     <td class="align-middle"><?= strval(number_format($key->harga * 1000, 0, '', '.')) ?></td>
                   </tr>
@@ -657,10 +654,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           <button id="lihat1" class="btn btn-sm btn-outline-primary mb-3">Lihat</button>
           <span id="pengujian-si">
             <div class="alert alert-info mb-2">Untuk mengetahui akurasi klaster yang telah dibuat menggunakan pengujian Silhouette Coefficient(si).</div>
-            <?php foreach ($hasilByC as $vil) { ?>
-              <?php unset($c_jumlah); ?>
-              <?php unset($c_harga); ?>
-              <?php $kondisiC  = $vil->c; ?>
+            <?php foreach ($hasilByC as $vil) {
+              unset($c_jumlah);
+              unset($c_harga);
+              $kondisiC  = $vil->c;
+            ?>
 
               <?php $qt2 = $this->db->query('SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing WHERE c="' . $kondisiC . '"'); ?>
 
@@ -672,8 +670,8 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
               <div class="text-center mb-4 alert-warning">
                 <h5 class="font-weight-bold py-4 my-4">Hasil Perhitungan Jarak Ke Klaster Ke-<?= substr($vil->c, -1); ?></h5>
               </div>
-              <?php unset($hp) ?>
-              <?php foreach ($hasilByC as $key) { ?>
+              <?php unset($hp);
+              foreach ($hasilByC as $key) { ?>
                 <div class="mt-4 mb-4">
                   <h5 class="font-weight-bold">Klaster ke-<?= $clus = substr($key->c, -1); ?></h5>
                 </div>
@@ -684,34 +682,36 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 <div class="table-responsive">
                   <table class="data-table table hover multiple-select-row nowrap" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-light-blue text-dark">
-                      <tr align="center">
+                      <tr class="text-center">
                         <th width="5%">No</th>
                         <th>Item Produk</th>
                         <th>Jumlah</th>
                         <th>Harga (*1000)</th>
-                        <?php $jarak = 0; ?>
-                        <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
+                        <?php $jarak = 0;
+                        for ($i = 0; $i < count($c_jumlah); $i++) { ?>
                           <th>Jarak ke-<?= $i + 1 ?></th>
                         <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php $hasilEuclidian = 0; ?>
-                      <?php foreach ($q->getResultArray() as $val) { ?>
-                        <tr align="center">
+                      <?php $hasilEuclidian = 0;
+                      foreach ($q->getResultArray() as $val) { ?>
+                        <tr class="text-center">
                           <td class="align-middle"><?= $no + 1 ?></td>
                           <td class="align-middle text-left"><?= $val['item'] ?></td>
                           <td class="align-middle"><?php echo $val['jumlah'] ?></td>
                           <td class="align-middle"><?php echo $val['harga'] ?></td>
                           <?php for ($i = 0; $i < count($c_jumlah); $i++) { ?>
                             <td class="align-middle">
-                              <?php $euclidian = sqrt(pow(($c_jumlah[$i] - $val['jumlah']), 2) + pow(($c_harga[$i] - $val['harga']), 2)) ?>
-                              <?php echo $euclidian ?>
-                              <?php $hasilEuclidian = $hasilEuclidian + $euclidian ?>
+                              <?php
+                              $euclidian = sqrt(pow(($c_jumlah[$i] - $val['jumlah']), 2) + pow(($c_harga[$i] - $val['harga']), 2));
+                              echo $euclidian;
+                              $hasilEuclidian = $hasilEuclidian + $euclidian
+                              ?>
                               <br>
                             </td>
-                          <?php } ?>
-                          <?php $no++ ?>
+                          <?php }
+                          $no++ ?>
                         </tr>
                       <?php } ?>
                       <?php $jml = count($c_jumlah) ?>
@@ -723,26 +723,28 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     </tbody>
                   </table>
                 </div>
-                <?php $hasilEuclidian++ ?>
-              <?php } ?>
+                <?php $hasilEuclidian++;
+              } ?>
 
               <table class="data-table table hover multiple-select-row nowrap mt-4 mb-4">
                 <thead class="bg-light-blue text-dark">
-                  <tr align="center">
+                  <tr class="text-center">
                     <th>a(i)</th>
                     <th>b(i)</th>
                     <th>S(i)</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr align="center">
+                  <tr class="text-center">
                     <td><?= $a1[] = $hp[substr($vil->c, -1) - 1];
                         $ai = $hp[substr($vil->c, -1) - 1]; ?></td>
                     <td>
-                      <?php $ckkk = array($ai) ?>
-                      <?php $array = array_diff($hp, $ckkk);
-                      print_r($array);
-                      echo $bi = min($array) ?>
+                      <?php
+                        $ckkk = array($ai);
+                        $array = array_diff($hp, $ckkk);
+                        print_r($array);
+                        echo $bi = min($array);
+                      ?>
                     </td>
                     <td><?= $si[] = ($bi - $ai) / (MAX($bi, $ai)) ?></td>
                   </tr>
@@ -773,7 +775,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
           <span id="hasil-si">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead class="bg-light-blue text-dark">
-                <tr align="center">
+                <tr class="text-center">
                   <th width="5">No</th>
                   <th>Klaster ke-</th>
                   <th>S(i)</th>
@@ -786,12 +788,13 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 <?php $no = 1;
                 $jmlsi = 0 ?>
                 <?php foreach ($hasil as $key) { ?>
-                  <tr align="center">
-                    <td><?php echo $no ?></td>
-                    <td><?php echo $key->id ?></td>
-                    <td><?php echo $key->si;
+                  <tr class="text-center">
+                    <td><?= $no ?></td>
+                    <td><?= $key->id ?></td>
+                    <td><?= $key->si;
                         $jmlsi = $jmlsi + $key->si;
-                        $jms = $key->si; ?></td>
+                        $jms = $key->si; ?>
+                    </td>
                     <?php $no++ ?>
                     <td>
                       <?php
@@ -810,15 +813,15 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     </td>
                   </tr>
                 <?php } ?>
-                <tr align="center">
+                <tr class="text-center">
                   <th colspan="2">Jumlah</th>
                   <th colspan="2"><?php echo $jmlsi ?></th>
                 </tr>
-                <tr align="center">
+                <tr class="text-center">
                   <th colspan="2">Rata-rata</th>
                   <th colspan="2"><?php echo $rt2 = $jmlsi / count($hasil) ?></td>
                 </tr>
-                <tr align="center">
+                <tr class="text-center">
                   <th colspan="2">Hasil</th>
                   <th colspan="2">
                     <?php
@@ -897,8 +900,8 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 $tahapan = $t->tahapan;
               }
               ?>
-              <?php $q2 = $this->db->query("SELECT c, jumlah, harga FROM centroid where tahapan=$tahapan-1"); ?>
-              <?php $b = $q2->getResultObject(); ?>
+              <?php $q2 = $this->db->query("SELECT c, jumlah, harga FROM centroid where tahapan=$tahapan-1");
+              $b = $q2->getResultObject(); ?>
             <table class="table table-bordered">
               <tr>
                 <th>Centroid Medoids -</th>
@@ -965,12 +968,13 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 <th class="text-center">Jumlah</th>
                 <th class="text-center">Harga</th>
               </tr>
-              <?php for ($i = 1; $i <= COUNT($b); $i++) { ?>
-                <?php $q3 = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing where c = 'c$i' ORDER BY jumlah ASC"); ?>
-                <?php $hasil_q3 = $q3->getResultObject(); ?>
+              <?php for ($i = 1; $i <= COUNT($b); $i++) {
+                $q3 = $this->db->query("SELECT hasil_klaster.c as c, hasil_processing.jumlah as jumlah, hasil_processing.harga as harga, hasil_processing.item_produk as item FROM hasil_klaster INNER JOIN hasil_processing ON hasil_klaster.fk_id_processing = hasil_processing.id_processing where c = 'c$i' ORDER BY jumlah ASC");
 
-                <?php $q4 = $this->db->query("SELECT si from hasil_pengujian where id = " . $i); ?>
-                <?php $hasil_q4 = $q4->getResultObject(); ?>
+                $hasil_q3 = $q3->getResultObject();
+                $q4 = $this->db->query("SELECT si from hasil_pengujian where id = " . $i);
+                $hasil_q4 = $q4->getResultObject();
+              ?>
                 <tr style="<?php if (('c' . $i == $pilih) || ('c' . $i == $pilihmaxgbn)) {
                               echo 'background-color:rgb(216, 227, 252);';
                             } ?>">
@@ -983,8 +987,8 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     } ?>
                   </td>
                   <td>
-                    <?php $ll = 1 ?>
-                    <?php foreach ($hasil_q3 as $h) { ?>
+                    <?php $ll = 1;
+                    foreach ($hasil_q3 as $h) { ?>
                       <?= $ll++ . ')' . ' ' . '&nbsp&nbsp' . $h->item ?><br>
                     <?php } ?>
                   </td>
