@@ -274,10 +274,6 @@
       </div>
     </div>
     <br>
-    <!---calendar-->
-    <div class="table-responsive my-4">
-      <iframe src="https://calendar.google.com/calendar/embed?src=id.indonesian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FJakarta" style="border: 1;" width="100%" height="550" frameborder="0" scrolling="no"></iframe>
-    </div>
 
   </div>
 </div>
