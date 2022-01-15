@@ -26,21 +26,17 @@
         $jam = date('H:i');
         //atur salam menggunakan IF
         if ($jam > '05:30' && $jam < '10:30') {
-          $salam = 'Pagi';
-          $ffff = '/vendors/images/morning.png';
+          $salam = ['Pagi','morning.png'];
         } elseif ($jam >= '10:30' && $jam < '15:00') {
-          $salam = 'Siang';
-          $ffff =  '/vendors/images/day.png';
+          $salam = ['Siang','day.png'];
         } elseif ($jam >= '15:01' && $jam < '18:00') {
-          $salam = 'Sore';
-          $ffff =  '/vendors/images/afternoon.png';
+          $salam = ['Sore','afternoon.png'];
         } else {
-          $salam = 'Malam';
-          $ffff =  '/vendors/images/night.png';
+          $salam = ['Malam','night.png'];
         }
         ?>
         <p class="lead sss text-center text-md-left">
-          <img src="<?= base_url($ffff) ?>" style="width:33px"> Selamat <?= $salam ?>,
+          <img src="<?= base_url('/vendors/images/'.$salam[1]) ?>" style="width:33px"> Selamat <?= $salam[0] ?>,
         </p>
         <h2 class="text-white sss text-lowercase text-center text-md-left"><?= user()->username; ?></h2>
         <hr>

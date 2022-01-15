@@ -9,7 +9,9 @@
     </div>
   </div>
   <div class="menu-block customscroll">
-    <img src="<?= base_url(); ?>/vendors/images/banner-img.png" alt="banner" class="p-3 mt-4">
+    <center>
+      <img src="<?= base_url(); ?>/vendors/images/banner-img.png" alt="banner" class="p-3 mt-4" width="80%">
+    </center>
     <div class="sidebar-menu">
       <center>
         <span id="lihat-calendar" class="text-white" style="font-family:sans-serif">
@@ -68,18 +70,19 @@
           //ambil jam dan menit
           $jam = date('H:i');
           //atur salam menggunakan IF
+          $gf = ['morning.png','day.png','afternoon.png','night.png'];
           if ($jam > '05:30' && $jam < '10:30') {
-            $ffff = '/vendors/images/morning.png';
+            $ffff = $gf[0];
           } elseif ($jam >= '10:30' && $jam < '15:00') {
-            $ffff =  '/vendors/images/day.png';
+            $ffff = $gf[1];
           } elseif ($jam >= '15:01' && $jam < '18:00') {
-            $ffff =  '/vendors/images/afternoon.png';
+            $ffff = $gf[2];
           } else {
-            $ffff =  '/vendors/images/night.png';
+            $ffff = $gf[3];
           }
           ?>
           <span style="font-size:15px; color:#142127; font-family:Inter;">
-            <?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . '<br>' ?><span id="clock"></span> <img src="<?= base_url($ffff) ?>" style="width:22px" alt="suasana">
+            <?= hari_indo(date("l")) . ', ' . tgl_indo(date("Y-m-d")) . '<br>' ?><span id="clock"></span> <img src="<?= base_url('/vendors/images/'.$ffff) ?>" style="width:22px" alt="suasana">
           </span>
         </span>
       </center>
