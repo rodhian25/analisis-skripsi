@@ -751,10 +751,13 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tbody>
               </table>
             <?php } ?>
+            <?php  $query3 = "INSERT INTO hasil_pengujian(c,si) VALUES "; ?>
             <?php for ($o = 0; $o < count($si); $o++) {
-              $query3 = "insert into hasil_pengujian(c,si) values(" . $o . "," . $si[$o] . ")";
-              $this->db->query($query3);
-            } ?>
+              $query3 .= "(" . $o . "," . $si[$o] . "), ";
+            }
+            $query3 = rtrim($query3, ', ');
+            $this->db->query($query3);
+            ?>
           </span>
           <button id="tutup1" class="btn btn-sm btn-outline-primary mb-3">
             <i class="fa fa-ban"></i> Tutup
