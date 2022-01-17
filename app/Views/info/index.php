@@ -17,6 +17,16 @@
     <br>
     <!-- end breadcrumb -->
 
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <img src="<?= base_url("/vendors/images/headersidebar.jpg") ?>" alt="">
+        <small>Gambar. Suasana Dalam Coffee</small>
+      </div>
+
+    </div>
+    </br>
+
     <div class="row">
       <div class="col-md-4">
         <div class="pd-20 card-box mb-30">

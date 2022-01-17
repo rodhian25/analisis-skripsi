@@ -17,34 +17,45 @@
     </nav>
     <!--end breadcrumb-->
 
-    <div class="jumbotron bg-cover text-white" style="border-radius: 12px !important; background-image: linear-gradient(to right, rgba(0,0,0,0.7) 40%,rgba(0,0,0,0.1) 60%), url(<?= base_url(); ?>/vendors/images/headersidebar.jpg); padding-top:40px; padding-bottom:40px;">
-      <div class="container">
-        <?php
-        //ubah timezone menjadi Asia/Jakarta
-        date_default_timezone_set("Asia/Jakarta");
-        //ambil jam dan menit
-        $jam = date('H:i');
-        //atur salam menggunakan IF
-        if ($jam > '05:30' && $jam < '10:30') {
-          $salam = ['Pagi','morning.png'];
-        } elseif ($jam >= '10:30' && $jam < '15:00') {
-          $salam = ['Siang','day.png'];
-        } elseif ($jam >= '15:01' && $jam < '18:00') {
-          $salam = ['Sore','afternoon.png'];
-        } else {
-          $salam = ['Malam','night.png'];
-        }
-        ?>
-        <p class="lead sss text-center text-md-left">
-          <img src="<?= base_url('/vendors/images/'.$salam[1]) ?>" style="width:33px"> Selamat <?= $salam[0] ?>,
-        </p>
-        <h2 class="text-white sss text-lowercase text-center text-md-left"><?= user()->username; ?></h2>
-        <hr>
-        <p class="sss text-center text-md-left d-none d-md-block" style="font-size:13pt;">Selamat Datang di Sistem Analisis Data Pembelian Konsumen Dalam Menentukan Promosi Menggunakan Algoritma K-Medoids dan FP-Growth</p>
+
+    <div class="card mb-4 border-0" style="border-radius: 12px !important;">
+      <div class="row">
+
+        <div class="col-md-8">
+          <div class="card-body pl-4">
+            <?php
+            //ubah timezone menjadi Asia/Jakarta
+            date_default_timezone_set("Asia/Jakarta");
+            //ambil jam dan menit
+            $jam = date('H:i');
+            //atur salam menggunakan IF
+            if ($jam > '05:30' && $jam < '10:30') {
+              $salam = ['Pagi', 'morning.png'];
+            } elseif ($jam >= '10:30' && $jam < '15:00') {
+              $salam = ['Siang', 'day.png'];
+            } elseif ($jam >= '15:01' && $jam < '18:00') {
+              $salam = ['Sore', 'afternoon.png'];
+            } else {
+              $salam = ['Malam', 'night.png'];
+            }
+            ?>
+            <p class="lead text-center text-md-left">
+              <img src="<?= base_url('/vendors/images/' . $salam[1]) ?>" style="width:33px"> Selamat <?= $salam[0] ?>,
+            </p>
+            <h2 class="text-dark text-lowercase text-center text-md-left"><?= user()->username; ?></h2>
+            <hr>
+            <p class="text-center text-md-left d-none d-md-block" style="font-size:13pt;">Selamat Datang di Sistem Analisis Data Pembelian Konsumen Dalam Menentukan Promosi Menggunakan Algoritma K-Medoids dan FP-Growth</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <img src="<?= base_url("/vendors/images/hero.gif") ?>" alt="">
+        </div>
       </div>
     </div>
 
-    <div class="row">
+
+
+    <div class="row mt-2">
       <p class="container text-center text-md-left d-md-none pb-4" style="font-size:13pt;">Selamat Datang di Sistem Analisis Data Pembelian Konsumen Dalam Menentukan Promosi Menggunakan Algoritma K-Medoids dan FP-Growth</p>
       <div class="col-6 col-md-4 mb-30">
         <a href="<?= base_url('/data') ?>">
