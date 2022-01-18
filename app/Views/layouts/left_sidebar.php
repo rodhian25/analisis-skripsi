@@ -10,7 +10,7 @@
   </div>
   <div class="menu-block customscroll">
     <center>
-      <img src="<?= base_url(); ?>/vendors/images/coba.gif" alt="banner" class="p-3 mt-4" width="80%">
+      <img src="<?= base_url(); ?>/vendors/images/coba.gif" alt="banner"  width="100%">
     </center>
     <div class="sidebar-menu">
       <center>

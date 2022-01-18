@@ -157,9 +157,10 @@ class DataModel extends Model
   {
     $jumlah_dipilih = count($id);
     for ($x = 0; $x < $jumlah_dipilih; $x++) {
-      $query = "UPDATE data_produk SET jenis ='" . $jenis . "' WHERE id='$id[$x]'";
-      $this->db->query($query);
+      $iduser[] = $id[$x];
     }
+    $query = "UPDATE data_produk SET jenis = '".$jenis."' WHERE id IN (" . join(', ',$iduser) . ")";
+    $this->db->query($query);
   }
 
 
