@@ -1044,16 +1044,21 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
 
     </div>
     <?php
-    if ($rt2 <= 0.25) {
-      echo "<p class='text-danger'>Akurasi klaster " . round($rt2, 3) . " masih sangat rendah</p>";
-    }
+    //jika nilai akurasi nya kurang atau sama dengan 0.25 maka otomatis sistem akan reload lagi
+    if ($rt2 <= 0.25) {?>
+        <script>
+        location.reload();
+        </script>
+    <?php }
+    else{
     ?>
-    <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
-    <?php if ($rt2 > 0.25) {  ?>
+      <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
       <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm"><i class="fa fa-calculator"></i> Buka Perhitungan</a>
       <a href="#" id="tutup_perhitungan" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i> Tutup Perhitungan</a>
       <a href="<?php base_url() ?>/analisis/asosiasi" class="btn btn-success btn-sm"><i class="fa fa-arrow-right"></i> Lanjut FP-Growth</a>
-    <?php } ?>
+    <?php
+    }
+    ?>
     <br>
 
 
