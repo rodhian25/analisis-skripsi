@@ -6,15 +6,8 @@
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <br>
+    <?= $this->include('/layouts/breadcrumb') ?>
 
-    <!--end breadcrumb-->
     <a href="<?= base_url('/hasil/download') ?>" target="_blank" class="btn btn-success btn-sm mb-3">Download Hasil</a>
     <a href="<?= base_url('/hasil/download_fptree') ?>" target="_blank" class="btn btn-warning btn-sm mb-3 text-white">Download FP-Tree</a>
     <div class="card shadow mb-4">
@@ -142,19 +135,19 @@
               function penjabaran($x)
               {
                 $cobak = $x;
-                  $input = explode(", ", $cobak);
-                  $output = implode("','", array_map(
-                    function ($v, $k) {
-                      if (is_array($v)) {
-                        return $k . '[]=' . implode('&' . $k . '[]=', $v);
-                      } else {
-                        return $v;
-                      }
-                    },
-                    $input,
-                    array_keys($input)
-                  ));
-                  return $output;
+                $input = explode(", ", $cobak);
+                $output = implode("','", array_map(
+                  function ($v, $k) {
+                    if (is_array($v)) {
+                      return $k . '[]=' . implode('&' . $k . '[]=', $v);
+                    } else {
+                      return $v;
+                    }
+                  },
+                  $input,
+                  array_keys($input)
+                ));
+                return $output;
               }
 
               ?>

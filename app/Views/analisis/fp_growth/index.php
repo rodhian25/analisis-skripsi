@@ -12,17 +12,9 @@ ini_set('memory_limit', '10240M');
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <br />
-    <!--end breadcrumb-->
-
-    <?= $this->include('/layouts/loading') ?>
+    <?= $this->include('/layouts/breadcrumb') ?>
     <!-- Tahapan Analisis Data -->
+    <?= $this->include('/layouts/loading') ?>
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
 

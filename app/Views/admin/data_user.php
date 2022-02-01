@@ -12,13 +12,7 @@
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <!---->
+    <?= $this->include('/layouts/breadcrumb') ?>
 
     <div class="card-box mb-30">
       <?= view('Myth\Auth\Views\_message_block') ?>
@@ -52,8 +46,8 @@
                 <td><?= $user->no_hp; ?></td>
                 <td><?= $user->created_at; ?></td>
                 <td>
-                <form action="<?= base_url(); ?>/admin/data-user" method="post">
-                  <?= csrf_field() ?>
+                  <form action="<?= base_url(); ?>/admin/data-user" method="post">
+                    <?= csrf_field() ?>
                     <input type="hidden" name="id" value="<?= $user->userid ?>">
                     <button onclick="return confirm('Apakah Anda yakin? menghapus <?= $user->username ?>')" class="dropdown-item text-danger" type="submit"><i class="dw dw-trash"></i> Hapus</button>
                   </form>

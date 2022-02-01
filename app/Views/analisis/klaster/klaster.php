@@ -4,19 +4,12 @@
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <br>
-    <!---->
-
-    <?= $this->include('/layouts/loading') ?>
+    <?= $this->include('/layouts/breadcrumb') ?>
     <!-- Tahapan Analisis Data -->
+    <?= $this->include('/layouts/loading') ?>
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
+
     <?= view('Myth\Auth\Views\_message_block') ?>
 
     <div class="card shadow mb-4">
@@ -59,9 +52,9 @@
                 <input type="radio" name="data_analisis" id="data_analisis" placeholder="banyak" value="banyak">
                 <label for="banyak">Banyak di Beli</label>
                 <span id="gabungan">
-                <br>
-                <input type="radio" name="data_analisis" id="data_analisis" placeholder="gabungan" value="gabungan">
-                <label for="banyak"><small>Gabungan Keduanya</small></label>
+                  <br>
+                  <input type="radio" name="data_analisis" id="data_analisis" placeholder="gabungan" value="gabungan">
+                  <label for="banyak"><small>Gabungan Keduanya</small></label>
                 </span>
               </div>
             </span>
@@ -181,7 +174,7 @@
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && charCode != 46 && (charCode < 48 || charCode > 57)) {
       if (charCode == 44) {
-      alert('untuk koma (,) menggunakan titik (.)');
+        alert('untuk koma (,) menggunakan titik (.)');
       }
       alert('tidak boleh disi selain angka dan titik');
       return false;
@@ -204,9 +197,6 @@
     }
     return true;
   }
-
-
-
 </script>
 <script>
   $(document).ready(function() {
@@ -214,12 +204,13 @@
     $("#gabungan").hide();
     $("#lihat_data").hide();
   });
+
   function myFunction() {
     var x = document.getElementById("klaster").value;
-    if (x === 3 || x>2) {
+    if (x === 3 || x > 2) {
       $("#pilihan_centroid").show();
       $("#gabungan").show();
-    }else {
+    } else {
       $("#pilihan_centroid").hide();
       $("#gabungan").hide();
     }

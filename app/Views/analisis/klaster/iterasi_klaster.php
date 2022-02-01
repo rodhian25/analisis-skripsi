@@ -74,20 +74,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    </br>
-    <!---->
-
-    <?= $this->include('/layouts/loading') ?>
+    <?= $this->include('/layouts/breadcrumb') ?>
     <!-- Tahapan Analisis Data -->
+    <?= $this->include('/layouts/loading') ?>
     <?= $this->include('/layouts/tahapan') ?>
     <!-- End Tahapan Analisis Data -->
-    <br>
 
 
     <span id="perhitungan">
@@ -144,7 +135,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                   <?php foreach ($produk_rand as $m1) { ?>
                     <th><?= $m1['jumlah'] ?></th>
                     <th><?= $m1['harga'] ?></th>
-                  <?php }?>
+                  <?php } ?>
                 </tr>
               </thead>
               <tbody>
@@ -166,7 +157,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         <?php $hm[$e] = manhattan($e, $key->jumlah, $key->harga, centroids($produk_rand)[0], centroids($produk_rand)[1]);
                         $hc[$e] = $hm[$e]; ?>
                       </td>
-                      <?php $e++;
+                    <?php $e++;
                     }
                     ?>
                     <?php for ($i = 0; $i < COUNT($hc); $i++) {
@@ -278,7 +269,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         $hcnm[$l] = $hnm[$l];
                         ?>
                       </td>
-                      <?php $l++;
+                    <?php $l++;
                     }
                     for ($i = 0; $i < COUNT($hcnm); $i++) {
                       if ($hcnm[$i] == MIN($hcnm)) {
@@ -447,7 +438,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     <?php $sql3 = "INSERT INTO centroid_temp(jenis,iterasi,c) VALUES";
                     $no = 1;
                     $tcs0 = 0;
-                    $tc = 0; 
+                    $tc = 0;
                     foreach ($produk as $key) { ?>
                       <tr class="text-center">
                         <td class="align-middle"><?= $no ?></td>
@@ -468,7 +459,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         for ($i = 0; $i < COUNT($hc); $i++) {
                           if ($hc[$i] == MIN($hc)) { ?>
                             <td class='align-middle bg-success text-white font-weight-bold'>1</td>
-                          <?php
+                        <?php
                             $cm = $i + 1;
                             $it = $iterasi + 1;
                             $sql3 .= "('NM'," . $it . ",'c" . $cm . "'),";
@@ -622,7 +613,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         <?php
                         $sql4 .= "(" . $key->id_processing . ",'c" . $kk . "'),";
                         ?>
-                      <?php } else {
+                    <?php } else {
                         echo "<td>0</td>";
                       }
                     }
@@ -723,7 +714,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                     </tbody>
                   </table>
                 </div>
-                <?php $hasilEuclidian++;
+              <?php $hasilEuclidian++;
               } ?>
 
               <table class="data-table table hover multiple-select-row nowrap mt-4 mb-4">
@@ -740,10 +731,10 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                         $ai = $hp[substr($vil->c, -1) - 1]; ?></td>
                     <td>
                       <?php
-                        $ckkk = array($ai);
-                        $array = array_diff($hp, $ckkk);
-                        print_r($array);
-                        echo $bi = min($array);
+                      $ckkk = array($ai);
+                      $array = array_diff($hp, $ckkk);
+                      print_r($array);
+                      echo $bi = min($array);
                       ?>
                     </td>
                     <td><?= $si[] = ($bi - $ai) / (MAX($bi, $ai)) ?></td>
@@ -751,7 +742,7 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
                 </tbody>
               </table>
             <?php } ?>
-            <?php  $query3 = "INSERT INTO hasil_pengujian(c,si) VALUES "; ?>
+            <?php $query3 = "INSERT INTO hasil_pengujian(c,si) VALUES "; ?>
             <?php for ($o = 0; $o < count($si); $o++) {
               $query3 .= "(" . $o . "," . $si[$o] . "), ";
             }
@@ -1045,12 +1036,11 @@ function manhattan($perulangan, $jumlahnya, $harganya, $centroidJumlah, $centroi
     </div>
     <?php
     //jika nilai akurasi nya kurang atau sama dengan 0.25 maka otomatis sistem akan reload lagi
-    if ($rt2 <= 0.25) {?>
-        <script>
+    if ($rt2 <= 0.25) { ?>
+      <script>
         location.reload();
-        </script>
-    <?php }
-    else{
+      </script>
+    <?php } else {
     ?>
       <a href="<?php base_url() ?>/analisis" class="btn btn-warning btn-sm text-white"><i class="fa fa-undo"></i> Ulangi Klaster</a>
       <a href="#" id="buka_perhitungan" class="btn btn-info btn-sm"><i class="fa fa-calculator"></i> Buka Perhitungan</a>

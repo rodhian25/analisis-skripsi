@@ -4,13 +4,7 @@
 <div class="main-container">
   <div class="pd-ltr-20">
     <!--breadcrumb-->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <!--end breadcrumb-->
+    <?= $this->include('/layouts/breadcrumb') ?>
 
     <div class="row">
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-5">

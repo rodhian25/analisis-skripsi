@@ -7,15 +7,8 @@
 <?= $this->section('main-container') ?>
 <div class="main-container">
   <div class="pd-ltr-20">
-    <!--breadcrumb -->
-    <nav aria-label="breadcrumb" role="navigation">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page"><a class="text-primary" href="<?= base_url(); ?>/">Beranda</a></li>
-        <li class="breadcrumb-item"><?= $title ?></li>
-      </ol>
-    </nav>
-    <br>
-    <!-- end breadcrumb -->
+    <!--breadcrumb-->
+    <?= $this->include('/layouts/breadcrumb') ?>
 
 
     <div class="row">
@@ -23,7 +16,6 @@
         <img src="<?= base_url("/vendors/images/headersidebar.jpg") ?>" alt="">
         <small>Gambar. Suasana Dalam Coffee</small>
       </div>
-
     </div>
     </br>
 
